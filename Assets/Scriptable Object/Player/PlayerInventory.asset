@@ -18,4 +18,5 @@ MonoBehaviour:
   itemsName:
   - Sword
   numberofKeys: 0
-  rubis: 0
+  rubis: 900
+  rubisTemp: 0

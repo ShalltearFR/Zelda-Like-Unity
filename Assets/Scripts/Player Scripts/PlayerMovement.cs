@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
         stagger,
         idle,
         takeObject,
-        bloquing
+        bloquing,
     }
 
     public PlayerState currentState;

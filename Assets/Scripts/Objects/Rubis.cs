@@ -49,6 +49,9 @@ public class Rubis : Powerup
                 playerInventory.rubis++;
                 powerupSignal.Raise();
                 yield return new WaitForSeconds(0.06f);
+            } else
+            {
+                break;
             }
         }
         Destroy(this.gameObject);

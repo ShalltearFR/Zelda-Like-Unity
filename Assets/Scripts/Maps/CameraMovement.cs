@@ -23,8 +23,8 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        // Limite les FPS du jeu à 60
-        Application.targetFrameRate = 60;
+        // Limite les FPS du jeu à 60 (peut etre ...)
+        Application.targetFrameRate = 30;
         QualitySettings.vSyncCount = 0;
         
         // Recupère la résolution afin d'adapter la cam
