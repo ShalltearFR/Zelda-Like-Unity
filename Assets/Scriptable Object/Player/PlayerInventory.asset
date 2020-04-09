@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d861d5b60186e44dbcf5910a4ff3676, type: 3}
+  m_Name: PlayerInventory
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
+  items:
+  - {fileID: 11400000, guid: 8f61acd0c1e3b1c47b5e62508f70ba67, type: 2}
+  itemsName:
+  - Sword
+  numberofKeys: 0
+  rubis: 0
