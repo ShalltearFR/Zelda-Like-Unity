@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     public Transform target;
     public float smoothing;
     public VectorValue startingPlayerPosition;
+    private int fpsLimite = 60;
 
     [Header("Limitation Camera")]
     public Vector2 minPosition;
@@ -24,8 +25,9 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         // Limite les FPS du jeu à 60 (peut etre ...)
-        Application.targetFrameRate = 30;
         QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = fpsLimite;
+        
         
         // Recupère la résolution afin d'adapter la cam
         ScreenResolution = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
@@ -82,5 +84,11 @@ public class CameraMovement : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
             }
         }
+    }
+
+    private void Update()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = fpsLimite;
     }
 }

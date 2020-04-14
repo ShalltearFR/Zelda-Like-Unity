@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu]
+[System.Serializable]
 
 public class BoolValue : ScriptableObject, ISerializationCallbackReceiver
 {

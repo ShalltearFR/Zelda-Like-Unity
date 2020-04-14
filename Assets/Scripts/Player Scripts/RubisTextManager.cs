@@ -2,16 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public class RubisTextManager : MonoBehaviour
 {
     public Inventory playerInventory;
     public TextMeshProUGUI rubisDisplay;
+    private SaveManager saveManager;
 
     private void Start()
     {
+        saveManager = GameObject.FindWithTag("SaveManager").GetComponent<SaveManager>();
+        DefaultRubis();
+
         UpdateRubisCount();
         playerInventory.rubisTemp = 0;
+    }
+
+    private void DefaultRubis()
+    {
+        if (!File.Exists(saveManager.dataPath + "/4.dat"))
+        {
+            playerInventory.rubis = 0;
+            rubisDisplay.text = "000";
+        }
     }
 
     public void UpdateRubisCount()

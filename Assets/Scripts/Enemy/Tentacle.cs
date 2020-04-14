@@ -13,6 +13,8 @@ public class Tentacle : Enemy
     public float attackRadius;
     public Transform homePosition;
     public Animator anim;
+    private PlayerMovement playerMovement;
+    private PauseMenu pauseMenu;
 
     private Vector3 randomlyMovingAnimation;
     private int randomNumberX;
@@ -29,12 +31,14 @@ public class Tentacle : Enemy
         myRigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").transform;
+        playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        pauseMenu = GameObject.Find("Manager").GetComponent<PauseMenu>();
     }
 
     void FixedUpdate()
     {
         // Si le joueur est dans le rayon de recherche du mob, suit le joueur
-        if (GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.interact)
+        if (playerMovement.currentState != PlayerMovement.PlayerState.interact && !pauseMenu.isPause)
         {
             CheckDistance();
         }
