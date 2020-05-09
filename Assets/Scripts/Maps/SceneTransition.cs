@@ -21,13 +21,21 @@ public class SceneTransition : MonoBehaviour
     public Vector2 playerPosition;
     public float fadeWait;
 
-    private void Awake()
+    private void Start()
     {
         // Animation de fondu de sortie
         if (fadeOutPanel != null)
         {
-            GameObject panel = Instantiate(fadeOutPanel, playerStorage.initialValue, Quaternion.identity) as GameObject;
-            Destroy(panel, 1);
+            if (SceneManager.GetActiveScene().name != "MainMenu")
+            {
+                GameObject panel = Instantiate(fadeOutPanel, playerStorage.initialValue, Quaternion.identity) as GameObject;
+                Destroy(panel, 1);
+            } else
+            {
+                // panel = Instantiate(fadeOutPanel, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+            }
+
+            
         }
     }
 

@@ -11,7 +11,7 @@ public class Heart : Powerup
 
     private void Start()
     {
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[0];
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0];
     }
 
     public void OnTriggerEnter2D(Collider2D other)

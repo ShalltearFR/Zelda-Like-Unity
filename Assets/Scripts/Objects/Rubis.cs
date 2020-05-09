@@ -12,8 +12,8 @@ public class Rubis : Powerup
     private void Start()
     {
         powerupSignal.Raise();
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[0];
-        audioSource2 = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[4];
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0];
+        audioSource2 = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[4];
     }
 
     public void OnTriggerEnter2D(Collider2D other)

@@ -43,6 +43,12 @@ public class SaveManager : MonoBehaviour
         {
             dataPath += "/my games/ZeldaLike/";
         }
+
+        #if UNITY_EDITOR
+        #else
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        #endif
     }
 
     public void GetSlotsInfos()

@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sr;
     private bool breackSpamming = false;
 
+    public GameObject projectile;
+
     void Start()
     {
         currentState = PlayerState.walk;
@@ -58,8 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position = startingPosition.initialValue;
 
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[2];
-        audioSourceLinkAttack = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[3];
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[2];
+        audioSourceLinkAttack = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[3];
         matDefault = GetComponent<SpriteRenderer>().material;
         sr = GetComponent<SpriteRenderer>();
     }
@@ -91,16 +93,19 @@ public class PlayerMovement : MonoBehaviour
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-        if (currentState == PlayerState.walk || currentState == PlayerState.idle)
-        {
-            if (change.x != 0 || change.y != 0) { currentState = PlayerState.walk; } else { currentState = PlayerState.idle; }
-        }
+
 
             if (currentState != PlayerState.takeObject)
         {
             if (Input.GetButtonDown("Attack") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
             {
                 StartCoroutine(AttackCo());
+            } else if (Input.GetButtonDown("RT") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
+            {
+                StartCoroutine(RTCo());
+            } else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
+            {
+                if (change.x != 0 || change.y != 0) { currentState = PlayerState.walk; } else { currentState = PlayerState.idle; }
             }
         }
 
@@ -152,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
                 
                 animator.SetBool("LaunchPot&Sign", false);
 
-                yield return new WaitForSeconds(0.05f);
+                yield return null;
 
                 //   animator.SetBool("LaunchPot&Sign", false);
                 isTakingObject = false;
@@ -193,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
 
                 animator.SetBool("LaunchPot&Sign", false);
 
-                yield return new WaitForSeconds(0.05f);
+                yield return null;
 
                 //   animator.SetBool("LaunchPot&Sign", false);
                 isTakingObject = false;
@@ -226,6 +231,47 @@ public class PlayerMovement : MonoBehaviour
                 currentState = PlayerState.walk;
             }
         }
+    }
+
+    private IEnumerator RTCo()
+    {
+        if (playerInventory.itemsName.Contains("Sword"))
+        {
+            //animator.SetBool("attacking", true);
+            currentState = PlayerState.attack;
+
+            animator.SetBool("FireBow", true);
+            
+            //audioSourceLinkAttack.clip = soundsEffect[Random.Range(0, 3)] as AudioClip;
+            //audioSourceLinkAttack.Play();
+
+            yield return null;
+            animator.SetBool("FireBow", false);
+            yield return new WaitForSeconds(0.40f);
+            audioSourceLinkAttack.clip = Resources.Load<AudioClip>("Audio/SE/Arrow");
+            audioSourceLinkAttack.Play();
+
+            makeArrow();
+            //animator.SetBool("attacking", false);
+            yield return new WaitForSeconds(0.20f);
+            if (currentState != PlayerState.interact && currentState != PlayerState.bloquing)
+            {
+                currentState = PlayerState.idle;
+            }
+        }
+    }
+
+    private void makeArrow()
+    {
+        Vector2 direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        Arrow arrow = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Arrow>();
+        arrow.Setup(direction, ChooseArrowDirectionSprite());
+    }
+
+    Vector3 ChooseArrowDirectionSprite()
+    {
+        float temp = Mathf.Atan2(animator.GetFloat("moveY"), animator.GetFloat("moveX")) * Mathf.Rad2Deg;
+        return new Vector3(0, 0, temp);
     }
 
     public void RaiseItem(TreasureChest.TypeOfItem typeOfItem)

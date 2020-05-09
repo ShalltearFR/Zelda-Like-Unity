@@ -10,9 +10,18 @@ public class MainMenu : MonoBehaviour
 {
     private EventSystem eventSystem;
     public SaveManager saveManager;
+    public SoundManagement soundManager;
 
     [Header("Main Menu")]
     public GameObject menu1;
+    public Animator pressStart;
+    public Animator options;
+
+    [Header("Verification du menu actif")]
+    public bool isPressStart;
+    public bool isInMainMenu;
+    public bool isInSlotMenu;
+    public bool isInOptions;
 
     [Header("Slot Menu")]
     private GameObject slotMenu;
@@ -22,6 +31,7 @@ public class MainMenu : MonoBehaviour
 
     [Header("Others")]
     public string slotMode;
+    public TextMeshProUGUI slotModeTxt;
 
 
     private int fpsLimite = 60; 
@@ -33,8 +43,7 @@ public class MainMenu : MonoBehaviour
         Application.targetFrameRate = fpsLimite;
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         slotMenu = GameObject.Find("Slot Menu");
-
-        CursorNewGame();
+        isPressStart = true;
         StartCoroutine(CheckSlots());
     }
 
@@ -66,7 +75,6 @@ public class MainMenu : MonoBehaviour
             if (secondsTemp < 10)
             { seconds = "0" + secondsTemp.ToString(); }
             else { seconds = secondsTemp.ToString(); }
-
 
             playedTime[0].text = "Temps " + hours + ":" + minutes + ":" + seconds;
 
@@ -100,7 +108,6 @@ public class MainMenu : MonoBehaviour
 
             if (secondsTemp < 10)
             { seconds = "0" + secondsTemp.ToString(); } else { seconds = secondsTemp.ToString(); }
-
 
             playedTime[1].text = "Temps "+ hours + ":" + minutes + ":" + seconds;
         }
@@ -138,7 +145,6 @@ public class MainMenu : MonoBehaviour
             { seconds = "0" + secondsTemp.ToString(); }
             else { seconds = secondsTemp.ToString(); }
 
-
             playedTime[2].text = "Temps " + hours + ":" + minutes + ":" + seconds;
         }
         else
@@ -157,21 +163,83 @@ public class MainMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = fpsLimite;
+
+        if (isInMainMenu)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                StartCoroutine(BackToPressStart());
+                GameObject startSelectedButton = GameObject.Find("NewGame Button");
+                eventSystem.SetSelectedGameObject(null);
+            }
+        }
+
+        if (isPressStart)
+        {
+            if (Input.GetButtonDown("X"))
+            {
+                StartCoroutine(StartPressed());
+                isPressStart = false;
+            }
+        }
+
+        if (isInSlotMenu)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                SlotToMainMenuButton();
+            }
+        }
+
+        if (isInOptions)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                StartCoroutine(OptionsToMainMenu());
+            }
+        }
+    }
+
+    IEnumerator BackToPressStart()
+    {
+        isInMainMenu = false;
+        menu1.GetComponent<Animator>().SetTrigger("Close");
+        yield return new WaitForSeconds(0.30f);
+        pressStart.SetTrigger("idle");
+        yield return new WaitForSeconds(0.35f);
+        isPressStart = true;
+    }
+
+    IEnumerator StartPressed()
+    {
+        pressStart.SetTrigger("pressed");
+
+        soundManager.soundEffectSource[0].clip = Resources.Load<AudioClip>("Audio/SE/Heart piece");
+        soundManager.soundEffectSource[0].Play();
+
+        yield return new WaitForSeconds(1f);
+        menu1.GetComponent<Animator>().SetTrigger("Open");
+        CursorNewGame();
+        yield return new WaitForSeconds(0.35f);
+        isInMainMenu = true;
     }
 
     public void SlotModeButton(string value)
     {
         slotMode = value;
+        isInMainMenu = false;
+        if (value == "New Game") { slotModeTxt.text = "Nouvelle Partie"; }
+        if (value == "Continue") { slotModeTxt.text = "Continuer"; }
         StartCoroutine(SlotModeButton());
     }
 
     IEnumerator SlotModeButton()
     {
-           eventSystem.SetSelectedGameObject(null);
+        eventSystem.SetSelectedGameObject(null);
         
         menu1.GetComponent<Animator>().SetTrigger("Close");
         yield return new WaitForSeconds(0.30f);
@@ -179,7 +247,49 @@ public class MainMenu : MonoBehaviour
         slotMenu.GetComponent<Animator>().SetTrigger("Open");
         yield return new WaitForSeconds(0.05f);
         eventSystem.SetSelectedGameObject(GameObject.Find("Slot Button First"));
+        yield return new WaitForSeconds(0.35f);
+        isInSlotMenu = true;
 
+    }
+
+    public void OptionsButton()
+    {
+        StartCoroutine(OptionsButtonCo());
+    }
+
+    IEnumerator OptionsButtonCo()
+    {
+        isInMainMenu = false;
+        eventSystem.SetSelectedGameObject(null);
+
+        menu1.GetComponent<Animator>().SetTrigger("Close");
+        yield return new WaitForSeconds(0.30f);
+
+        options.GetComponent<Animator>().SetTrigger("Open");
+        yield return new WaitForSeconds(0.05f);
+        eventSystem.SetSelectedGameObject(GameObject.Find("Options"));
+        yield return new WaitForSeconds(0.35f);
+        eventSystem.SetSelectedGameObject(GameObject.Find("Music Slider"));
+        isInOptions = true;
+    }
+
+    public void OptionsToMainMenuButton()
+    {
+        StartCoroutine(OptionsToMainMenu());
+    }
+
+    IEnumerator OptionsToMainMenu()
+    {
+        isInOptions = false;
+        eventSystem.SetSelectedGameObject(null);
+
+        options.SetTrigger("Close");
+        yield return new WaitForSeconds(0.30f);
+
+        menu1.GetComponent<Animator>().SetTrigger("Open");
+        yield return new WaitForSeconds(0.35f);
+        CursorNewGame();
+        isInMainMenu = true;
     }
 
     public void ExitButton()
@@ -193,6 +303,7 @@ public class MainMenu : MonoBehaviour
 
     public void SlotToMainMenuButton()
     {
+        isInSlotMenu = false;
         StartCoroutine(SlotToMainMenuButtonCo());
     }
 
@@ -204,5 +315,20 @@ public class MainMenu : MonoBehaviour
 
         menu1.GetComponent<Animator>().SetTrigger("Open");
         CursorNewGame();
+        yield return new WaitForSeconds(0.35f);
+        isInMainMenu = true;
+    }
+
+    public void SlotButton(int value)
+    {
+        if(slotMode == "Continue")
+        {
+            Debug.Log("continue");
+        }
+
+        if (slotMode == "New Game")
+        {
+            Debug.Log("new game");
+        }
     }
 }

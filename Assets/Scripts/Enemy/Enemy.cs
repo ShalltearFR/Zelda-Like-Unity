@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
     {
         // Attribut les valeurs de certaines variables au demarrage
         health = maxHealth.initialValue;
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[1]; ;
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[1]; ;
         animator = GetComponent<Animator>();
         matFlash = Resources.Load("Graphics/Effects/Flash Effect", typeof(Material)) as Material;
         matDefault = gameObject.GetComponent<SpriteRenderer>().material;

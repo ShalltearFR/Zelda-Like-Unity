@@ -21,7 +21,7 @@ public class Sign : Interactable
     void Start()
     {
         anim = GetComponent<Animator>();
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[0]; ;
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0]; ;
     }
 
     // Update is called once per frame

@@ -34,7 +34,7 @@ public class TreasureChest : Interactable
     {
         anim = GetComponent<Animator>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[0];
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0];
     }
     private void Update()
     {

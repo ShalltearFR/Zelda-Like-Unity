@@ -18,7 +18,7 @@ public class Pot : Interactable
     {
         // Attribut des valeurs sur certaines variables
         anim = GetComponent<Animator>();
-        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().audioSource[0];
+        audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0];
     }
 
     public void Smash()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8187002271932231928}
   - component: {fileID: 7143270079468970568}
   - component: {fileID: 4750833217179529624}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Context Clue
   m_TagString: ContextClue
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 2493156022741639951}
   - component: {fileID: 2493156022741639950}
   - component: {fileID: 2493156022741639945}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Up Hitbox
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 2493156022920917322}
   - component: {fileID: 2493156022920917301}
   - component: {fileID: 2493156022920917300}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Left Hitbox
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 2858384194343857569}
   - component: {fileID: 4081177430274485735}
   - component: {fileID: 8783709996111536247}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Link
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -499,6 +499,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 60955fccc461c7445a11478db1b7c776, type: 3}
   - {fileID: 8300000, guid: 653f374e04e47624f817fb80fb48cdf0, type: 3}
   matFlash: {fileID: 2100000, guid: ed140c9293d3c5944a2d418f2531eb47, type: 2}
+  projectile: {fileID: 2992374065449379888, guid: a8a9827eb253dba44a60ffa0a22b2a20,
+    type: 3}
 --- !u!61 &1170813810092817873
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -623,7 +625,7 @@ GameObject:
   - component: {fileID: 3115448659526234441}
   - component: {fileID: 2493156024623182416}
   - component: {fileID: 2493156024623182419}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Down Hitbox
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -720,7 +722,7 @@ GameObject:
   - component: {fileID: 2493156024697804217}
   - component: {fileID: 4539470458735421890}
   - component: {fileID: 2493156024697804216}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Right Hitbox
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -880,6 +882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Take Object
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617253816852500460, guid: 8fef09f33e6a05d41afef976d7507c19,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4365353388740797918, guid: 8fef09f33e6a05d41afef976d7507c19,
         type: 3}
