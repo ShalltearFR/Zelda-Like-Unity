@@ -17,14 +17,12 @@ public class Sign : Interactable
     public BoxCollider2D[] boxCollider;
     public BoxCollider2D playerBoxCollider;
 
-    // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0]; ;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Interract") && playerInRange && boxCollider[1].IsTouching(playerBoxCollider)) // Fais lire le message de la pancarte

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RoomMove : MonoBehaviour
 {
-    private Vector3 playerChange;
+    public Vector3 playerChange;
     private CameraMovement cam;
     public GameObject futurMap;
 
@@ -19,11 +19,11 @@ public class RoomMove : MonoBehaviour
         cam = Camera.main.GetComponent<CameraMovement>();
 
         // Deplace le personnage en fonction de l'orientation choisi dans l'inspector
-        if (orientation.ToString() == "Left") { playerChange.x = -1.75f; }
-        if (orientation.ToString() == "Right") { playerChange.x = 1.75f; }
+        if (orientation.ToString() == "Left") { playerChange.x = -2f; }
+        if (orientation.ToString() == "Right") { playerChange.x = 2f; }
 
-        if (orientation.ToString() == "Top") { playerChange.y = 1.75f; }
-        if (orientation.ToString() == "Bottom") { playerChange.y = -1.75f; }
+        if (orientation.ToString() == "Top") { playerChange.y = 2f; }
+        if (orientation.ToString() == "Bottom") { playerChange.y = -2f; }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

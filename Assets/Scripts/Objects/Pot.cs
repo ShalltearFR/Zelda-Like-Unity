@@ -91,7 +91,5 @@ public class Pot : Interactable
 
         MakeLoot();
         this.gameObject.SetActive(false);
-
-
     }
 }

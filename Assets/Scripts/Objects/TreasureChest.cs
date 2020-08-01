@@ -42,11 +42,11 @@ public class TreasureChest : Interactable
         {
             if (!isOpen)
             {
-                //Open Chest
+                // Ouvre le coffre
                 OpenChest();
             } else
             {
-                // chest is allready open
+                // Coffre est deja ouvert
                 ChestAlreadyOpen();
             }
         }
@@ -59,11 +59,9 @@ public class TreasureChest : Interactable
 
     public void OpenChest()
     {
-        // Dialog Window on
+        // Ouvre le contenu du coffre et l'ajoute dans l'inventaire du personnage
         dialogBox.SetActive(true);
-        // Dialog text = content text
         dialogText.text = contents.itemDescription;
-        // add content to the inventory
         playerInventory.AddItem(contents,typeOfItem);
 
         if (typeOfItem == TypeOfItem.FullHeart || typeOfItem == TypeOfItem.Grappin || typeOfItem == TypeOfItem.Boomerang || typeOfItem == TypeOfItem.Bow || typeOfItem == TypeOfItem.Sword)
@@ -72,11 +70,8 @@ public class TreasureChest : Interactable
             audioSource.Play();
         }
         playerInventory.currentItem = contents;
-        // Raise the signal to the player to animate
         raiseItem.Raise();
-        // raise the context clue
         contextOn.Raise();
-        // set the chest to opened
         isOpen = true;
         anim.SetBool("opened", true);
         contextOff.Raise();
@@ -84,26 +79,22 @@ public class TreasureChest : Interactable
 
     public void ChestAlreadyOpen()
     {
-            // Dialog off
-            dialogBox.SetActive(false);
-        // set the current item to empty
-        //    playerInventory.currentItem = null;
-        // raise the signal to the player to stop animating
+        // Le coffre est deja ouvert donc desactive l'interraction avec le coffre
+        dialogBox.SetActive(false);
         
-            raiseItem.Raise();
+        raiseItem.Raise();
         enable = false;
         playerInRange = false;
         contextOff.Raise();
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger && !isOpen)
         {
+            // Affiche le "!" quand le joueur est à porté du coffre
             contextOn.Raise();
             playerInRange = true;
-
         }
     }
 
@@ -111,6 +102,7 @@ public class TreasureChest : Interactable
     {
         if (other.CompareTag("Player") && !other.isTrigger && !isOpen)
         {
+            // Retire le "!" quand le joueur est hors de portée du coffre
             contextOff.Raise();
             playerInRange = false;
         }

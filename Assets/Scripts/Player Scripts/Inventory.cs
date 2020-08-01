@@ -16,12 +16,13 @@ public class Inventory : ScriptableObject
 
     public void AddItem(Item itemToAdd, TreasureChest.TypeOfItem typeOfItem)
     {
-        // is the item a key ?
+        // Est ce que l'item est une clé ?
         if (itemToAdd.isKey)
         {
             numberofKeys++;
         } else
         {
+        // Rajoute l'item dans l'inventaire
             if (!items.Contains(itemToAdd))
             {
                 itemsName.Add(typeOfItem.ToString());

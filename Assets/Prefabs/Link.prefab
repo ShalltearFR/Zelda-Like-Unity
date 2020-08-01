@@ -198,6 +198,7 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   typeOfMob: 0
+  isEnable: 1
 --- !u!1 &2493156022920917320
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +295,7 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   typeOfMob: 0
+  isEnable: 1
 --- !u!1 &2493156024505444121
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +502,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 653f374e04e47624f817fb80fb48cdf0, type: 3}
   matFlash: {fileID: 2100000, guid: ed140c9293d3c5944a2d418f2531eb47, type: 2}
   projectile: {fileID: 2992374065449379888, guid: a8a9827eb253dba44a60ffa0a22b2a20,
+    type: 3}
+  Boomerang: {fileID: 2784652143810609777, guid: 364aac73a9bd1fd438867267b5dc5d31,
     type: 3}
 --- !u!61 &1170813810092817873
 BoxCollider2D:
@@ -710,6 +714,7 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   typeOfMob: 0
+  isEnable: 1
 --- !u!1 &2493156024697804223
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +809,7 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   typeOfMob: 0
+  isEnable: 1
 --- !u!1001 &1305475471
 PrefabInstance:
   m_ObjectHideFlags: 0

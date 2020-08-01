@@ -8,6 +8,7 @@ public class Heart : Powerup
     public FloatValue heartContainers;
     public float amountToIncrease;
     private AudioSource audioSource;
+    private bool antiSpam = false;
 
     private void Start()
     {
@@ -18,6 +19,15 @@ public class Heart : Powerup
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
+            HeartProcedure();
+        }
+    }
+
+    public void HeartProcedure()
+    {
+        if (!antiSpam)
+        {
+            antiSpam = true;
             playerHealth.RuntimeValue += amountToIncrease;
             if (playerHealth.initialValue > heartContainers.RuntimeValue * 2f)
             {

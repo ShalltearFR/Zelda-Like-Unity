@@ -7,11 +7,9 @@ public class GameTime : MonoBehaviour
    // public float gameTime;
     public FloatValue savedGameTime;
 
-    // Start is called before the first frame update
     void Start()
     {
-    //    gameTime = savedGameTime.RuntimeValue;
-
+    //  gameTime = savedGameTime.RuntimeValue;
         DontDestroyOnLoad(this.gameObject);
     }
 

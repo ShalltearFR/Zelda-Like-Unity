@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using Unity.Collections;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 // Script permettant à la caméra de suivre le joueur
 
@@ -9,6 +13,9 @@ public class CameraMovement : MonoBehaviour
     public float smoothing;
     public VectorValue startingPlayerPosition;
     private int fpsLimite = 60;
+    public GameObject fadeOutPanel;
+    private bool initCamera = false;
+    private SaveManager saveManager;
 
     [Header("Limitation Camera")]
     public Vector2 minPosition;
@@ -22,15 +29,47 @@ public class CameraMovement : MonoBehaviour
     [Header("Résolution écran")]
     public Vector3 ScreenResolution;
 
-    void Start()
+    public IEnumerator InitCamera()
     {
-        // Limite les FPS du jeu à 60 (peut etre ...)
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = fpsLimite;
+        gameObject.transform.position = new Vector3(target.position.x, target.position.y, -4);
         
-        
-        // Recupère la résolution afin d'adapter la cam
-        ScreenResolution = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        // Animation de fondu de sortie
+        if (fadeOutPanel != null)
+        {
+            GameObject panel = Instantiate(fadeOutPanel, target.position, Quaternion.identity) as GameObject;
+            panel.transform.SetParent(this.gameObject.transform);
+            Destroy(panel, 2.50f);
+            yield return new WaitForSeconds(1f);
+        }
+        yield return null;
+    }
+
+    private void GetActiveMap()
+    {
+        //GameObject.Find("Main Camera").transform.position = target.position;
+        // Recupere le nom de la map
+        if (saveManager.onlyTeleport.RuntimeValue == "")
+        {
+            StringValue activeMapTemp = GameObject.Find("Save Manager").GetComponent<SaveManager>().objects[8] as StringValue;
+            string map = activeMapTemp.RuntimeValue;
+            activeMap = GameObject.Find(map);
+        } else
+        {
+            StringValue activeMapTemp = GameObject.Find("Save Manager").GetComponent<SaveManager>().onlyTeleport as StringValue;
+            string map = activeMapTemp.RuntimeValue;
+            activeMap = GameObject.Find(map);
+            activeMapTemp.RuntimeValue = "";
+        }
+
+        gameObject.GetComponent<Transform>().position = new Vector3(startingPlayerPosition.teleporationValue.x, startingPlayerPosition.teleporationValue.y, -4);
+        Init();
+    }
+
+    private void Init()
+    {
+        //        Debug.Log(ScreenResolution);
+
+        if (activeMap == null) { activeMap = GameObject.Find("Map1"); }
 
         // Recupère les valeur x/y min/max sur la map active
         mapSizeMin = activeMap.GetComponent<MapSize>().sizeMin;
@@ -43,9 +82,43 @@ public class CameraMovement : MonoBehaviour
         maxPosition.x = mapSizeMax.x - ScreenResolution.x;
         maxPosition.y = mapSizeMax.y - ScreenResolution.y;
 
-        gameObject.GetComponent<Transform>().position = new Vector3(startingPlayerPosition.initialValue.x, startingPlayerPosition.initialValue.y, -4);
+        if (minPosition.x > maxPosition.x)
+        {
+            float xPositionTemp = minPosition.x;
+            minPosition.x = maxPosition.x;
+            maxPosition.x = xPositionTemp;
+        }
+
+        if (GameObject.Find("Set Teleport") != null) { GameObject.Find("Set Teleport").GetComponent<SetTeleport>().Teleport(); }
 
         StartCoroutine(Charging());
+        //InvokeRepeating("InitCamera", 0f, 0.00f);
+        RefreshCamLimit(activeMap);
+    }
+
+    private void Awake()
+    {
+        // Recupère la résolution afin d'adapter la cam
+        ScreenResolution = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    }
+
+    void Start()
+    {
+        // Limite les FPS du jeu à 60 (peut etre ...)
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = fpsLimite;
+
+        saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
+        target = GameObject.FindWithTag("Player").transform;
+
+        //        Debug.Log("Screen.width =" + Screen.width);
+        //        Debug.Log("Screen.height = " + Screen.height);
+        //       Debug.Log("Camera.main.transform.position.z = " + Camera.main.transform.position.z);
+
+        //RefreshCamLimit(activeMap);
+
+
+        InvokeRepeating("GetActiveMap", 0.10f, 0.00f);
     }
 
     private IEnumerator Charging()
@@ -54,6 +127,7 @@ public class CameraMovement : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState = PlayerMovement.PlayerState.idle;
     }
+
 
     public void RefreshCamLimit(GameObject gameobject)
     {
@@ -68,20 +142,25 @@ public class CameraMovement : MonoBehaviour
 
         maxPosition.x = mapSizeMax.x - ScreenResolution.x + activeMap.transform.position.x;
         maxPosition.y = mapSizeMax.y - ScreenResolution.y + activeMap.transform.position.y;
+        initCamera = true;
     }
 
     void LateUpdate()
     {
-        // Camera qui suit le personnage
-        if (GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.bloquing) { 
-            if (transform.position != target.position)
+        if (initCamera)
+        {
+            // Camera qui suit le personnage
+            if (GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.bloquing)
             {
-                Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
+                if (transform.position != target.position)
+                {
+                    Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
 
-                targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
-                targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
+                    targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
+                    targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
 
-                transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+                    transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+                }
             }
         }
     }

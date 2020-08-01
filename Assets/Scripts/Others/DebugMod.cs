@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DebugMode : MonoBehaviour
+public class DebugMod : MonoBehaviour
 {
     private GameObject DebugGameobject;
     private GameObject GameSaveManagerGameobject;

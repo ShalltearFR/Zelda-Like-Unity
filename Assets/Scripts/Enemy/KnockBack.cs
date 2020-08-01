@@ -50,7 +50,8 @@ public class KnockBack : MonoBehaviour
                 Rigidbody2D effect = other.GetComponent<Rigidbody2D>();
                 if (effect != null)
                 {
-                    Vector2 difference = effect.transform.position - transform.position;
+                    other.GetComponent<Enemy>().stopFreezing = true;
+                      Vector2 difference = effect.transform.position - transform.position;
                     difference = difference.normalized * thrust;
                     effect.AddForce(difference, ForceMode2D.Impulse);
 
@@ -59,7 +60,7 @@ public class KnockBack : MonoBehaviour
                 }
             }
 
-            // Intteraction ennemis/joueur
+            // Interaction ennemis/joueur
             if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
             {
                 if (!this.gameObject.CompareTag("TakeObject"))
@@ -71,14 +72,14 @@ public class KnockBack : MonoBehaviour
                         difference = difference.normalized * thrust;
                         hit.AddForce(difference, ForceMode2D.Impulse);
 
-                        // Si l'ennemis touche
+                        // Si on frappe l'ennemis
                         if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
                         {
                             hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
                             other.GetComponent<Enemy>().Knock(hit, knockTime, damage, typeOfMob);
                         }
 
-                        // Si le joueur touche
+                        // Si l'ennemis frappe le joueur
                         if (other.gameObject.CompareTag("Player"))
                         {
                             bool isInTakeObjectState = false;

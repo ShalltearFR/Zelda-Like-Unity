@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8812989904428111421}
-    m_Position: {x: 200, y: 0, z: 0}
+    m_Position: {x: 290, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8319937710654983304}
     m_Position: {x: 235, y: 65, z: 0}
@@ -678,6 +678,13 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: Cursor
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.016666668
+    functionName: CursorSlot
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

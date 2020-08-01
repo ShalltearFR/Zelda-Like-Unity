@@ -19,6 +19,5 @@ public class MapSize : MonoBehaviour
 
     sizeMax.x = transform.GetChild(0).GetComponent<Tilemap>().cellBounds.xMax;
     sizeMax.y = transform.GetChild(0).GetComponent<Tilemap>().cellBounds.yMax;
-
     }
 }

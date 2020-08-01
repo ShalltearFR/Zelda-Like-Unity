@@ -8,6 +8,7 @@ public class Rubis : Powerup
     private AudioSource audioSource;
     public int NumberOfRubis;
     private AudioSource audioSource2;
+    private bool antiSpam = false;
 
     private void Start()
     {
@@ -19,7 +20,16 @@ public class Rubis : Powerup
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
-            {
+        {
+            RubisOperation();
+        }
+    }
+
+    public void RubisOperation()
+    {
+        if (!antiSpam)
+        {
+            antiSpam = true;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
 

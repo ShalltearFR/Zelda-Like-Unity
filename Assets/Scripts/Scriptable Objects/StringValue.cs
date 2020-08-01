@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [CreateAssetMenu]
 
 public class StringValue : ScriptableObject, ISerializationCallbackReceiver
 {
     public string initialValue;
-
-    [HideInInspector]
     public string RuntimeValue;
+    private StringValue saveWorldName;
+
+    public StringValue(StringValue value)
+    {
+        initialValue = value.initialValue;
+        RuntimeValue = value.initialValue;
+    }
 
     public void OnAfterDeserialize()
     {
-        RuntimeValue = initialValue;
+        initialValue = RuntimeValue;
     }
 
     public void OnBeforeSerialize()

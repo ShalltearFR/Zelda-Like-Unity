@@ -21,7 +21,8 @@ public class RubisTextManager : MonoBehaviour
 
     private void DefaultRubis()
     {
-        if (!File.Exists(saveManager.dataPath + "/4.dat"))
+        // Si le fichier de sauvegarde n'existe pas, indique les rubis à 0 (n'est normalement plus necessaire)
+        if (!File.Exists(saveManager.dataPath + "/4.data"))
         {
             playerInventory.rubis = 0;
             rubisDisplay.text = "000";
@@ -30,6 +31,7 @@ public class RubisTextManager : MonoBehaviour
 
     public void UpdateRubisCount()
     {
+        // Met à jour le nombre de rubis dans L'HUD
         if (playerInventory.rubis <= 9)
         {
             rubisDisplay.text = "00" + playerInventory.rubis;

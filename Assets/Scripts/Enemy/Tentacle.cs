@@ -40,20 +40,25 @@ public class Tentacle : Enemy
         // Si le joueur est dans le rayon de recherche du mob, suit le joueur
         if (playerMovement.currentState != PlayerMovement.PlayerState.interact && !pauseMenu.isPause)
         {
-            CheckDistance();
+            if (!isEnemyFreeze)
+            {
+                CheckDistance();
+            }
         }
 
         // Si le joueur est hors du rayon de recherche, effectue des mouvements aléatoire
         if (isActuallyRandomMoving)
         {
-            RandomlyMovement();
+            if (!isEnemyFreeze)
+            {
+                RandomlyMovement();
+            }
         }
     }
 
     private void RandomlyMovement()
     {
         // Fonction permettant de deplacer aléatoirement le mob
-
         if (randomPositifOrNegatifX == 1 && randomPositifOrNegatifY == 1)
         {
             randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + randomNumberX, transform.position.y + randomNumberY, 0), 0.01f);
@@ -80,7 +85,6 @@ public class Tentacle : Enemy
     private void CheckDistance()
     {
         // Fonction permettant de verifier si le joueur est dans le rayon de recherche du mob
-
         // Si le joueur est dans le rayon de recherche
         if (Vector3.Distance(target.position,
                             transform.position) <= chaseRadius
@@ -125,9 +129,6 @@ public class Tentacle : Enemy
     private void ChangeState(EnemyState newState)
     {
         // Change l'etat du mob
-        if (currentState != newState)
-        {
-            currentState = newState;
-        }
+        if (currentState != newState) { currentState = newState; }
     }
 }

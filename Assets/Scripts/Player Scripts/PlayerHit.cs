@@ -6,6 +6,7 @@ public class PlayerHit : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Si le joueur tape un type d'objet avec son épée
         if (other.CompareTag("Pot"))
         {
             other.GetComponent<Pot>().Smash();

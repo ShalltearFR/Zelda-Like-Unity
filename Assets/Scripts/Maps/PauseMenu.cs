@@ -12,31 +12,47 @@ public class PauseMenu : MonoBehaviour
     private Animator animator;
     private PlayerMovement playermovement;
     private bool stopSpamAnimation = false;
-    //  public PlayerMovement.PlayerState playerCurrentState;
     public string playerStateTemp;
+    public bool blockPause;
 
     private void Start()
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             Panel = GameObject.FindWithTag("PauseMenu");
-            animator = GameObject.FindWithTag("PauseMenu").GetComponent<Animator>();
+            if (GameObject.FindWithTag("PauseMenu") != null) { animator = GameObject.FindWithTag("PauseMenu").GetComponent<Animator>(); }
             playermovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+
+            // Creation d'evenement au clic du bouton
+            GameObject.Find("Continue").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameObject.Find("Continue").GetComponent<Button>().onClick.AddListener(() => ContinueButton());
+
+            GameObject.Find("Options").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameObject.Find("Options").GetComponent<Button>().onClick.AddListener(() => OptionsButton());
+
+            GameObject.Find("Save").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameObject.Find("Save").GetComponent<Button>().onClick.AddListener(() => SaveButton());
+
+            GameObject.Find("Exit").GetComponent<Button>().onClick.RemoveAllListeners();
+            GameObject.Find("Exit").GetComponent<Button>().onClick.AddListener(() => ExitButton());
         }
     }
 
+    private void SaveButton() { GameObject.Find("Save Manager").GetComponent<SaveManager>().SaveButton(); }
+
+    private void OptionsButton()
+    {
+        Debug.Log("Options");
+    }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (!stopSpamAnimation)
+            if (!blockPause && !stopSpamAnimation && !isPause)
             {
-                if (!isPause)
-                {
-                    if (Input.GetButtonDown("Start"))
+                if (Input.GetButtonDown("Start"))
                     { StartCoroutine(pauseOn()); }
-                }
             }
         }
     }
@@ -57,6 +73,8 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator pauseOn()
     {
+        // Procedure d'animation d'ouverture du menu de pause
+        // Changement d'etat du joueur et des mobs
         stopSpamAnimation = true;
         isPause = true;
         if (playermovement.currentState == PlayerMovement.PlayerState.walk || playermovement.currentState == PlayerMovement.PlayerState.idle)
@@ -92,8 +110,9 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator pauseOff()
     {
+        // Procedure d'animation d'ouverture du menu de pause
+        // Changement d'etat du joueur et des mobs
         EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-
         eventSystem.SetSelectedGameObject(null);
 
         animator.SetBool("pauseOff", true);

@@ -9,8 +9,10 @@ using System;
 public class MainMenu : MonoBehaviour
 {
     private EventSystem eventSystem;
+    private bool fileAreDelete;
     public SaveManager saveManager;
     public SoundManagement soundManager;
+    public SceneTransition sceneTransition;
 
     [Header("Main Menu")]
     public GameObject menu1;
@@ -32,11 +34,11 @@ public class MainMenu : MonoBehaviour
     [Header("Others")]
     public string slotMode;
     public TextMeshProUGUI slotModeTxt;
-
-
+    private GameObject textPanel;
+    public BoolValue isNewGame;
+    private float[] playedTimeFloat = new float[3];
     private int fpsLimite = 60; 
 
-    // Start is called before the first frame update
     void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -45,114 +47,62 @@ public class MainMenu : MonoBehaviour
         slotMenu = GameObject.Find("Slot Menu");
         isPressStart = true;
         StartCoroutine(CheckSlots());
+        textPanel = GameObject.Find("TextPanel");
+        sceneTransition = GameObject.Find("Canvas").GetComponent<SceneTransition>();
     }
 
     IEnumerator CheckSlots()
     {
+        // Insère les informations des variables "Slot" en jeu
         yield return new WaitForSeconds(0.5f);
-        // Check Slot 1
-        if (!saveManager.isSlot1Empty)
+
+        // Variable temporaire permettant de calculer le temps de jeu sur les 3 slots
+        FloatValue playedTimeDump = saveManager.slot1Save[6] as FloatValue;
+        playedTimeFloat[0] = playedTimeDump.RuntimeValue;
+
+        playedTimeDump = saveManager.slot2Save[6] as FloatValue;
+        playedTimeFloat[1] = playedTimeDump.RuntimeValue;
+
+        playedTimeDump = saveManager.slot3Save[6] as FloatValue;
+        playedTimeFloat[2] = playedTimeDump.RuntimeValue;
+
+        for (int i = 0; i < 3; i++)
         {
-            slotFull[0].alpha = 1;
-            slotEmpty[0].alpha = 0;
-            slotEmpty[0].interactable = false;
-            slotEmpty[0].blocksRaycasts = false;
+            if (!saveManager.isSlotEmpty[i])
+            {
+                slotFull[i].alpha = 1;
+                slotEmpty[i].alpha = 0;
+                slotEmpty[i].interactable = false;
+                slotEmpty[i].blocksRaycasts = false;
 
-            int hoursTemp = Convert.ToInt32(saveManager.Slot1PlayedTime.RuntimeValue / 3600);
-            int minutesTemp = Convert.ToInt32((saveManager.Slot1PlayedTime.RuntimeValue % 3600) / 60);
-            int secondsTemp = Convert.ToInt32((saveManager.Slot1PlayedTime.RuntimeValue % 3600) % 60);
+                int hoursTemp = Convert.ToInt32(playedTimeFloat[i] / 3600);
+                int minutesTemp = Convert.ToInt32((playedTimeFloat[i] % 3600) / 60);
+                int secondsTemp = Convert.ToInt32((playedTimeFloat[i] % 3600) % 60);
 
-            string hours = "", minutes = "", seconds = "";
+                string hours = "", minutes = "", seconds = "";
 
-            if (hoursTemp < 10)
-            { hours = "0" + hoursTemp.ToString(); }
-            else { hours = hoursTemp.ToString(); }
+                // Conversion Heure, minutes et secondes
+                if (hoursTemp < 10)
+                { hours = "0" + hoursTemp.ToString(); }
+                else { hours = hoursTemp.ToString(); }
 
-            if (minutesTemp < 10)
-            { minutes = "0" + minutesTemp.ToString(); }
-            else { minutes = minutesTemp.ToString(); }
+                if (minutesTemp < 10)
+                { minutes = "0" + minutesTemp.ToString(); }
+                else { minutes = minutesTemp.ToString(); }
 
-            if (secondsTemp < 10)
-            { seconds = "0" + secondsTemp.ToString(); }
-            else { seconds = secondsTemp.ToString(); }
+                if (secondsTemp < 10)
+                { seconds = "0" + secondsTemp.ToString(); }
+                else { seconds = secondsTemp.ToString(); }
 
-            playedTime[0].text = "Temps " + hours + ":" + minutes + ":" + seconds;
+                playedTime[i].text = "Temps " + hours + ":" + minutes + ":" + seconds;
 
-        } else
-        {
-            slotFull[0].interactable = false;
-            slotFull[0].blocksRaycasts = false;
-            slotFull[0].alpha = 0;
-            slotEmpty[0].alpha = 1;
-        }
-
-        // Check Slot 2
-        if (!saveManager.isSlot2Empty)
-        {
-            slotFull[1].alpha = 1;
-            slotEmpty[1].alpha = 0;
-            slotEmpty[1].interactable = false;
-            slotEmpty[1].blocksRaycasts = false;
-            
-            int hoursTemp = Convert.ToInt32(saveManager.Slot2PlayedTime.RuntimeValue / 3600);
-            int minutesTemp = Convert.ToInt32((saveManager.Slot2PlayedTime.RuntimeValue % 3600) / 60);
-            int secondsTemp = Convert.ToInt32((saveManager.Slot2PlayedTime.RuntimeValue % 3600) % 60);
-
-            string hours = "", minutes = "", seconds = "";
-
-            if (hoursTemp < 10)
-            { hours = "0" + hoursTemp.ToString(); } else { hours = hoursTemp.ToString(); }
-
-            if (minutesTemp < 10)
-            { minutes = "0" + minutesTemp.ToString(); } else { minutes = minutesTemp.ToString(); }
-
-            if (secondsTemp < 10)
-            { seconds = "0" + secondsTemp.ToString(); } else { seconds = secondsTemp.ToString(); }
-
-            playedTime[1].text = "Temps "+ hours + ":" + minutes + ":" + seconds;
-        }
-        else
-        {
-            slotFull[1].interactable = false;
-            slotFull[1].blocksRaycasts = false;
-            slotFull[1].alpha = 0;
-            slotEmpty[1].alpha = 1;
-        }
-
-        // Check Slot 3
-        if (!saveManager.isSlot3Empty)
-        {
-            slotFull[2].alpha = 1;
-            slotEmpty[2].alpha = 0;
-            slotEmpty[2].interactable = false;
-            slotEmpty[2].blocksRaycasts = false;
-
-            int hoursTemp = Convert.ToInt32(saveManager.Slot3PlayedTime.RuntimeValue / 3600);
-            int minutesTemp = Convert.ToInt32((saveManager.Slot3PlayedTime.RuntimeValue % 3600) / 60);
-            int secondsTemp = Convert.ToInt32((saveManager.Slot3PlayedTime.RuntimeValue % 3600) % 60);
-
-            string hours = "", minutes = "", seconds = "";
-
-            if (hoursTemp < 10)
-            { hours = "0" + hoursTemp.ToString(); }
-            else { hours = hoursTemp.ToString(); }
-
-            if (minutesTemp < 10)
-            { minutes = "0" + minutesTemp.ToString(); }
-            else { minutes = minutesTemp.ToString(); }
-
-            if (secondsTemp < 10)
-            { seconds = "0" + secondsTemp.ToString(); }
-            else { seconds = secondsTemp.ToString(); }
-
-            playedTime[2].text = "Temps " + hours + ":" + minutes + ":" + seconds;
-        }
-        else
-        {
-            slotFull[2].interactable = false;
-            slotFull[2].blocksRaycasts = false;
-            slotFull[2].alpha = 0;
-            slotEmpty[2].alpha = 1;
+            } else
+            {
+                slotFull[i].interactable = false;
+                slotFull[i].blocksRaycasts = false;
+                slotFull[i].alpha = 0;
+                slotEmpty[i].alpha = 1;
+            }
         }
     }
 
@@ -168,6 +118,7 @@ public class MainMenu : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = fpsLimite;
 
+        // Si le jeu est dans le menu principal et que la touche retour est appuyé
         if (isInMainMenu)
         {
             if (Input.GetButtonDown("Cancel"))
@@ -178,6 +129,7 @@ public class MainMenu : MonoBehaviour
             }
         }
 
+        // Si le joueur est dans la phase "Press Start" et que la touche "X" est appuyé
         if (isPressStart)
         {
             if (Input.GetButtonDown("X"))
@@ -187,6 +139,7 @@ public class MainMenu : MonoBehaviour
             }
         }
 
+        // Si le joueur est dans le "Slot Menu" et que la touche retour est appuyé -> "Main Menu"
         if (isInSlotMenu)
         {
             if (Input.GetButtonDown("Cancel"))
@@ -195,6 +148,7 @@ public class MainMenu : MonoBehaviour
             }
         }
 
+        // Si le joueur est dans les options et que la touche retour est appuyé -> "Main Menu"
         if (isInOptions)
         {
             if (Input.GetButtonDown("Cancel"))
@@ -202,10 +156,64 @@ public class MainMenu : MonoBehaviour
                 StartCoroutine(OptionsToMainMenu());
             }
         }
+
+        // Si la touche "Y" est selectionné dans le slot menu
+        if (saveManager.cursorSlot > 0)
+        {
+            if (Input.GetButtonDown("Y"))
+            {
+                StartCoroutine(YButtonProcedure());
+            }
+        }
+    }
+
+    IEnumerator YButtonProcedure()
+    {
+        // Demande de confirmation pour supprimer la sauvegarde selectionné
+        Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
+
+        // Creation d'evenement au clic du bouton
+        yesButton.onClick.RemoveAllListeners();
+        yesButton.onClick.AddListener(() => StartCoroutine(OnlyDeleteSave(saveManager.cursorSlot)));
+
+        GameObject.Find("TextPanelMessage").GetComponent<TextMeshProUGUI>().text = "Etes vous sur de vouloir supprimer cette sauvegarde ?";
+        slotMenu.GetComponent<Animator>().SetTrigger("Close");
+        textPanel.GetComponent<Animator>().SetTrigger("open");
+        isInSlotMenu = false;
+
+        GameObject startSelectedButton = GameObject.Find("NoButton");
+        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        eventSystem.SetSelectedGameObject(startSelectedButton);
+
+        yield return null;
+    }
+
+    private IEnumerator OnlyDeleteSave(int slot)
+    {
+        // Proccedure de suppression de sauvegarde et mise à jour des informations des slots
+        fileAreDelete = true;
+
+        StartCoroutine(saveManager.DeleteSave((slot - 1), false, true));
+
+        saveManager.GetSlotsInfos();
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(CheckSlots());
+        
+        yield return new WaitForSeconds(0.5f);
+
+        slotMenu.GetComponent<Animator>().SetTrigger("Open");
+        textPanel.GetComponent<Animator>().SetTrigger("close");
+
+        yield return new WaitForSeconds(0.05f);
+
+        GameObject startSelectedButton = GameObject.Find("Slot Button First");
+        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        eventSystem.SetSelectedGameObject(startSelectedButton);
     }
 
     IEnumerator BackToPressStart()
     {
+        // Retour sur la phase "Press Start"
         isInMainMenu = false;
         menu1.GetComponent<Animator>().SetTrigger("Close");
         yield return new WaitForSeconds(0.30f);
@@ -216,6 +224,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator StartPressed()
     {
+        // Animation de la phase "Press Start" puis passage au menu principal
         pressStart.SetTrigger("pressed");
 
         soundManager.soundEffectSource[0].clip = Resources.Load<AudioClip>("Audio/SE/Heart piece");
@@ -230,6 +239,7 @@ public class MainMenu : MonoBehaviour
 
     public void SlotModeButton(string value)
     {
+        // Affichage du type de slot (Nouvelle partie ou Continuer)
         slotMode = value;
         isInMainMenu = false;
         if (value == "New Game") { slotModeTxt.text = "Nouvelle Partie"; }
@@ -239,6 +249,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator SlotModeButton()
     {
+        // Animation du "Slot Menu"
         eventSystem.SetSelectedGameObject(null);
         
         menu1.GetComponent<Animator>().SetTrigger("Close");
@@ -249,7 +260,6 @@ public class MainMenu : MonoBehaviour
         eventSystem.SetSelectedGameObject(GameObject.Find("Slot Button First"));
         yield return new WaitForSeconds(0.35f);
         isInSlotMenu = true;
-
     }
 
     public void OptionsButton()
@@ -259,6 +269,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator OptionsButtonCo()
     {
+        // Animation du Menu d'options
         isInMainMenu = false;
         eventSystem.SetSelectedGameObject(null);
 
@@ -280,6 +291,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator OptionsToMainMenu()
     {
+        // Animation Options vers le Menu principal
         isInOptions = false;
         eventSystem.SetSelectedGameObject(null);
 
@@ -294,6 +306,7 @@ public class MainMenu : MonoBehaviour
 
     public void ExitButton()
     {
+        // Bouton pour quitter le jeu
     #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
     #else
@@ -309,6 +322,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator SlotToMainMenuButtonCo()
     {
+        // Animation du Menu Principal vers le "Slot Menu"
         eventSystem.SetSelectedGameObject(null);
         slotMenu.GetComponent<Animator>().SetTrigger("Close");
         yield return new WaitForSeconds(0.35f);
@@ -321,14 +335,100 @@ public class MainMenu : MonoBehaviour
 
     public void SlotButton(int value)
     {
+        StartCoroutine(SlotButtonCo(value));
+    }
+
+    private IEnumerator SlotButtonCo(int slot)
+    {
         if(slotMode == "Continue")
         {
-            Debug.Log("continue");
+            // Si le joueur est dans la partie "Continuer" et que le bouton du slot est appuyé
+            if (!saveManager.isSlotEmpty[slot])
+            {
+                slotMenu.GetComponent<Animator>().SetTrigger("Close");
+                saveManager.saveSlot.RuntimeValue = (slot + 1);
+                saveManager.saveSlot.initialValue = (slot + 1);
+                yield return new WaitForSeconds(0.5f);
+                soundManager.soundEffectSource[1].clip = Resources.Load<AudioClip>("Audio/SE/Heart piece");
+                soundManager.soundEffectSource[1].Play();
+                yield return new WaitForSeconds(2f);
+                StartCoroutine(sceneTransition.MainMenuTransitionCo("Continue", (slot + 1)));
+            } else
+            {
+                yield return new WaitForSeconds(0.05f);
+                soundManager.soundEffectSource[1].clip = Resources.Load<AudioClip>("Audio/SE/error");
+                soundManager.soundEffectSource[1].Play();
+            }
         }
 
         if (slotMode == "New Game")
         {
-            Debug.Log("new game");
+            // Si le joueur est dans la partie "Nouvelle partie" et que le bouton du slot est appuyé
+            if (saveManager.isSlotEmpty[(slot)])
+            {
+                // Si le slot est vide, demarre directement une nouvelle partie
+                if (fileAreDelete) { slotMenu.GetComponent<Animator>().SetTrigger("Close"); }
+                StartCoroutine(StartNewGameCo(false, slot));
+            } else
+            {
+                // Si le slot n'est pas vide, demande la confirmation pour effacer le slot
+                slotMenu.GetComponent<Animator>().SetTrigger("Close");
+                textPanel.GetComponent<Animator>().SetTrigger("open");
+                isInSlotMenu = false;
+                yield return new WaitForSeconds(0.05f);
+                
+                GameObject startSelectedButton = GameObject.Find("NoButton");
+                EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+                eventSystem.SetSelectedGameObject(startSelectedButton);
+
+                
+                Button yesButton = GameObject.Find("YesButton").GetComponent<Button>();
+                yesButton.onClick.RemoveAllListeners();
+                yesButton.onClick.AddListener(() => YesEraseNewGameButton((slot)));
+            }
         }
+    }
+
+    public void NoButton()
+    {
+        StartCoroutine(NoButtonCo());
+    }
+
+    private IEnumerator NoButtonCo()
+    {
+        // Retour au slot menu si le bouton Non est confirmé
+        textPanel.GetComponent<Animator>().SetTrigger("close");
+        slotMenu.GetComponent<Animator>().SetTrigger("Open");
+        isInSlotMenu = true;
+
+        yield return new WaitForSeconds(0.3f);
+
+        GameObject startSelectedButton = GameObject.Find("Slot Button First");
+        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        eventSystem.SetSelectedGameObject(startSelectedButton);
+    }
+
+    private void YesEraseNewGameButton(int slot)
+    {
+        // Procedure d'ecrasement de fichier
+        StartCoroutine(StartNewGameCo(true, slot));
+        StartCoroutine(saveManager.DeleteSave(slot, false, false));
+    }
+
+    private IEnumerator StartNewGameCo(bool isStringText, int slot)
+    {
+        // Procedure de nouvelle partie
+        yield return new WaitForSeconds(0.05f);
+        Debug.Log("Processus de nouvelle partie");
+        soundManager.soundEffectSource[1].clip = Resources.Load<AudioClip>("Audio/SE/Heart piece");
+        soundManager.soundEffectSource[1].Play();
+        StartCoroutine(saveManager.DeleteSave(slot, true, false));
+        if (isStringText) { textPanel.GetComponent<Animator>().SetTrigger("close"); }
+        if (isInSlotMenu) { slotMenu.GetComponent<Animator>().SetTrigger("Close"); }
+        isNewGame.initialValue = true;
+        saveManager.saveSlot.RuntimeValue = (slot + 1);
+        saveManager.saveSlot.initialValue = (slot + 1);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(sceneTransition.MainMenuTransitionCo("New Game", (slot +1)));
     }
 }

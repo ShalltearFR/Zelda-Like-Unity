@@ -5,30 +5,33 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Environment = System.Environment;
 using UnityEngine.SceneManagement;
+using UnityEditor;
+using System;
+
+
+// objects[0] (asSword) n'est pas utilisé
 
 public class SaveManager : MonoBehaviour
 {
     public string dataPath;
     public FloatValue saveSlot;
+    public bool[] isSlotEmpty = new bool[3];
+    private Transform playerPos;
+    public int cursorSlot;
+    private int currentSlot = -1;
+    private GameObject activeMap;
+    public StringValue onlyTeleport;
 
     [Header("Slot 1")]
-    public bool isSlot1Empty;
-    public ScriptableObject Slot1HeartContainers;
-    public ScriptableObject Slot1Health;
-    public FloatValue Slot1PlayedTime;
+    public List<ScriptableObject> slot1Save = new List<ScriptableObject>();
 
     [Header("Slot 2")]
-    public bool isSlot2Empty = false;
-    public ScriptableObject Slot2HeartContainers;
-    public ScriptableObject Slot2Health;
-    public FloatValue Slot2PlayedTime;
+    public List<ScriptableObject> slot2Save = new List<ScriptableObject>();
 
     [Header("Slot 3")]
-    public bool isSlot3Empty = false;
-    public ScriptableObject Slot3HeartContainers;
-    public ScriptableObject Slot3Health;
-    public FloatValue Slot3PlayedTime;
+    public List<ScriptableObject> slot3Save = new List<ScriptableObject>();
 
+    [Header("Slot Temporaire")]
     public List<ScriptableObject> objects = new List<ScriptableObject>();
 
     private void Awake()
@@ -38,7 +41,7 @@ public class SaveManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            dataPath += "/my games/ZeldaLike/Save " + saveSlot.RuntimeValue;
+            dataPath += "/my games/ZeldaLike/Save " + saveSlot.initialValue;
         } else
         {
             dataPath += "/my games/ZeldaLike/";
@@ -53,72 +56,31 @@ public class SaveManager : MonoBehaviour
 
     public void GetSlotsInfos()
     {
+        // Recupère les informations des différentes sauvegardes
         BinaryFormatter binary = new BinaryFormatter();
 
-        // Slot 1
-        if (File.Exists(dataPath + "Save 1/1.data"))
+        for (int i = 0; i < objects.Count; i++)
         {
-            FileStream file = File.Open(dataPath + "Save 1/1.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot1HeartContainers);
-            file.Close();
-        } else { isSlot1Empty = true;}
+            if (File.Exists(dataPath + "Save 1/0.data"))
+            {
+                FileStream file = File.Open(dataPath + "Save 1/" + i + ".data", FileMode.Open);
+                JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), slot1Save[i]);
+                file.Close();
+            } else { isSlotEmpty[0] = true; }
 
-        if (File.Exists(dataPath + "Save 1/3.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 1/3.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot1Health);
-            file.Close();
-        }
+            if (File.Exists(dataPath + "Save 2/0.data"))
+            {
+                FileStream file = File.Open(dataPath + "Save 2/" + i + ".data", FileMode.Open);
+                JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), slot2Save[i]);
+                file.Close();
+            } else { isSlotEmpty[1] = true; }
 
-        if (File.Exists(dataPath + "Save 1/6.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 1/6.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot1PlayedTime);
-            file.Close();
-        }
-
-        // Slot 2
-        if (File.Exists(dataPath + "Save 2/1.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 2/1.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot2HeartContainers);
-            file.Close();
-        } else { isSlot2Empty = true; }
-
-        if (File.Exists(dataPath + "Save 2/3.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 2/3.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot2Health);
-            file.Close();
-        }
-
-        if (File.Exists(dataPath + "Save 2/6.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 2/6.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot2PlayedTime);
-            file.Close();
-        }
-
-        // Slot 3
-        if (File.Exists(dataPath + "Save 3/1.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 3/1.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot3HeartContainers);
-            file.Close();
-        } else { isSlot3Empty = true; }
-
-        if (File.Exists(dataPath + "Save 3/3.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 3/3.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot3Health);
-            file.Close();
-        }
-
-        if (File.Exists(dataPath + "Save 3/6.data"))
-        {
-            FileStream file = File.Open(dataPath + "Save 3/6.data", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), Slot3PlayedTime);
-            file.Close();
+            if (File.Exists(dataPath + "Save 3/0.data"))
+            {
+                FileStream file = File.Open(dataPath + "Save 3/" + i + ".data", FileMode.Open);
+                JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), slot3Save[i]);
+                file.Close();
+            } else { isSlotEmpty[2] = true; }
         }
     }
 
@@ -126,7 +88,8 @@ public class SaveManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            LoadScriptibles();
+            StartCoroutine(LoadScriptiblesCo(false));
+            playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
         } else
         {
             GetSlotsInfos();
@@ -135,8 +98,7 @@ public class SaveManager : MonoBehaviour
 
     public void ResetScriptibles()
     {
-        Debug.Log("Suppression des sauvegardes");
-
+        // Supprime toutes les sauvegardes
         for (int i = 0; i < objects.Count; i++)
         {
             if (File.Exists(dataPath + string.Format("/{0}.data", i)))
@@ -147,30 +109,112 @@ public class SaveManager : MonoBehaviour
         StartCoroutine(Shutdown());
     }
 
+    public IEnumerator DeleteSave(int value, bool isEmptySlot, bool isOnlyDelete)
+    {
+        // Ré-initialise les variables pour demarrer une nouvelle partie
+#if UNITY_EDITOR
+        FileUtil.DeleteFileOrDirectory(dataPath + "Save " + (value + 1));
+#else
+        Directory.Delete(dataPath + "Save " + (value + 1), true);
+#endif
+
+        currentSlot = (value + 1);
+
+        VectorValue position = objects[2] as VectorValue;
+        position.teleporationValue = new Vector3(0, 0);
+        position.initialValue = new Vector3(0, 0);
+        position.defaultValue = new Vector3(0, 0);
+        objects[2] = position;
+
+        FloatValue playedTime = objects[6] as FloatValue;
+        playedTime.initialValue = 0;
+        playedTime.RuntimeValue = 0;
+        objects[6] = playedTime;
+
+        BoolValue asSword = objects[0] as BoolValue;
+        asSword.initialValue = false;
+        objects[0] = asSword;
+
+        FloatValue heartContainers = objects[1] as FloatValue;
+        heartContainers.initialValue = 3;
+        heartContainers.RuntimeValue = 3;
+        objects[1] = heartContainers;
+
+        FloatValue health = objects[3] as FloatValue;
+        health.initialValue = 6;
+        health.RuntimeValue = 6;
+        objects[3] = health;
+
+        StringValue worldName = objects[7] as StringValue;
+        worldName.initialValue = "Overworld";
+        worldName.RuntimeValue = "Overworld";
+        objects[7] = worldName;
+
+        Inventory playerInventory = objects[4] as Inventory;
+        playerInventory.items.Clear();
+        playerInventory.itemsName.Clear();
+        playerInventory.currentItem = null;
+        playerInventory.numberofKeys = 0;
+        playerInventory.rubis = 0;
+        playerInventory.rubisTemp = 0;
+        objects[4] = playerInventory;
+
+        if (isEmptySlot) { dataPath = dataPath + "Save " + (value + 1); }
+        yield return new WaitForSeconds(0.5f);
+
+        if (!isOnlyDelete) { SaveScriptibles(); }
+    }
+
     private IEnumerator Shutdown()
     {
+        // Ferme le jeu sous sa version editor
         yield return new WaitForSeconds(1f);
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     public void SaveButton()
     {
+        StartCoroutine(SaveButtonCo());
+        currentSlot = Convert.ToInt32(saveSlot.initialValue);
+    }
+
+    IEnumerator SaveButtonCo()
+    {
+        // Prepare la sauvegarde du jeu
+        StringValue saveWorldName = objects[7] as StringValue;
+        saveWorldName.RuntimeValue = SceneManager.GetActiveScene().name;
+        objects[7] = saveWorldName;
+
+        VectorValue position = objects[2] as VectorValue;
+        position.teleporationValue = new Vector3(playerPos.position.x, playerPos.position.y, -3);
+        objects[2] = position;
+
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            StringValue Map = objects[8] as StringValue;
+            Map.RuntimeValue = GameObject.Find("Main Camera").GetComponent<CameraMovement>().activeMap.name;
+            objects[8] = Map;
+        }
+
+        yield return null;
         SaveScriptibles();
-        
     }
 
     public void SaveScriptibles()
     {
-        Debug.Log("Sauvegarde du jeu : " + dataPath);
+        // Sauvegarde le jeu dans le slot correspondant
         if (!Directory.Exists(dataPath))
         {
-            //if it doesn't, create it
+            // Creation du dossier de sauvegarde s'il n'existe pas
             Directory.CreateDirectory(dataPath);
             Debug.Log("Creation du dossier de sauvegarde du jeu");
         }
 
         for (int i = 0; i < objects.Count; i++)
         {
+            // Sauvegarde les variables dans des fichiers
             FileStream file = File.Create(dataPath + string.Format("/{0}.data", i));
             BinaryFormatter binary = new BinaryFormatter();
             var json = JsonUtility.ToJson(objects[i]);
@@ -178,22 +222,36 @@ public class SaveManager : MonoBehaviour
             file.Close();
         }
 
-       // Debug.Log("Sauvegarde du jeu : " + dataPath);
-        
+        StartCoroutine(LoadScriptiblesCo(true));
     }
 
-    public void LoadScriptibles()
+    public IEnumerator LoadScriptiblesCo(bool isLoadSlot)
     {
-        Debug.Log("Chargement du jeu : " + dataPath);
-        for (int i = 0; i < objects.Count; i++)
+        if (onlyTeleport.RuntimeValue == "")
         {
-            if (File.Exists(dataPath + string.Format("/{0}.data", i)))
+            for (int i = 0; i < objects.Count; i++)
             {
-                FileStream file = File.Open(dataPath + string.Format("/{0}.data", i), FileMode.Open);
-                BinaryFormatter binary = new BinaryFormatter();
-                JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), objects[i]);
-                file.Close();
+                // Lit le contenu des fichiers et les insèrent dans les variables correspondante
+                if (File.Exists(dataPath + string.Format("/{0}.data", i)))
+                {
+                    FileStream file = File.Open(dataPath + string.Format("/{0}.data", i), FileMode.Open);
+                    BinaryFormatter binary = new BinaryFormatter();
+                    if (isLoadSlot)
+                    {
+                        // Charge les fichiers dans les variables "Slot"
+                        if (currentSlot == 1) { JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), slot1Save[i]); }
+                        if (currentSlot == 2) { JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), slot2Save[i]); }
+                        if (currentSlot == 3) { JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), slot3Save[i]); }
+                    }
+                    else
+                    {
+                        // Charge les fichiers dans les variables "Temporaire"
+                        JsonUtility.FromJsonOverwrite((string)binary.Deserialize(file), objects[i]);
+                    }
+                    file.Close();
+                }
             }
         }
+        yield return null;
     }
 }
