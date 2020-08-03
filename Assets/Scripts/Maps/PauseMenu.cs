@@ -15,6 +15,14 @@ public class PauseMenu : MonoBehaviour
     public string playerStateTemp;
     public bool blockPause;
 
+
+    private void Awake()
+    {
+        // Desactive la souris
+//        Cursor.lockState = CursorLockMode.Locked;
+//        Cursor.visible = false;
+    }
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
@@ -51,7 +59,7 @@ public class PauseMenu : MonoBehaviour
         {
             if (!blockPause && !stopSpamAnimation && !isPause)
             {
-                if (Input.GetButtonDown("Start"))
+                if (Input.GetButtonDown("Select"))
                     { StartCoroutine(pauseOn()); }
             }
         }
@@ -110,7 +118,7 @@ public class PauseMenu : MonoBehaviour
 
     private IEnumerator pauseOff()
     {
-        // Procedure d'animation d'ouverture du menu de pause
+        // Procedure d'animation de fermeture du menu de pause
         // Changement d'etat du joueur et des mobs
         EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         eventSystem.SetSelectedGameObject(null);

@@ -31,8 +31,7 @@ public class CameraMovement : MonoBehaviour
 
     public IEnumerator InitCamera()
     {
-        gameObject.transform.position = new Vector3(target.position.x, target.position.y, -4);
-        
+        if (SceneManager.GetActiveScene().name != "MainMenu") { gameObject.transform.position = new Vector3(target.position.x, target.position.y, -4); }
         // Animation de fondu de sortie
         if (fadeOutPanel != null)
         {
@@ -98,8 +97,11 @@ public class CameraMovement : MonoBehaviour
 
     private void Awake()
     {
-        // Recupère la résolution afin d'adapter la cam
-        ScreenResolution = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            // Recupère la résolution afin d'adapter la cam
+            ScreenResolution = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        }
     }
 
     void Start()
@@ -108,17 +110,20 @@ public class CameraMovement : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = fpsLimite;
 
-        saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
-        target = GameObject.FindWithTag("Player").transform;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
+            target = GameObject.FindWithTag("Player").transform;
 
-        //        Debug.Log("Screen.width =" + Screen.width);
-        //        Debug.Log("Screen.height = " + Screen.height);
-        //       Debug.Log("Camera.main.transform.position.z = " + Camera.main.transform.position.z);
+            //        Debug.Log("Screen.width =" + Screen.width);
+            //        Debug.Log("Screen.height = " + Screen.height);
+            //       Debug.Log("Camera.main.transform.position.z = " + Camera.main.transform.position.z);
 
-        //RefreshCamLimit(activeMap);
+            //RefreshCamLimit(activeMap);
 
 
-        InvokeRepeating("GetActiveMap", 0.10f, 0.00f);
+            InvokeRepeating("GetActiveMap", 0.10f, 0.00f);
+        } else  { StartCoroutine(InitCamera()); }
     }
 
     private IEnumerator Charging()
@@ -147,19 +152,22 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        if (initCamera)
+        if (SceneManager.GetActiveScene().name != "Main Menu")
         {
-            // Camera qui suit le personnage
-            if (GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.bloquing)
+            if (initCamera)
             {
-                if (transform.position != target.position)
+                // Camera qui suit le personnage
+                if (GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.bloquing)
                 {
-                    Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
+                    if (transform.position != target.position)
+                    {
+                        Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
 
-                    targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
-                    targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
+                        targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
+                        targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
 
-                    transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+                        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+                    }
                 }
             }
         }

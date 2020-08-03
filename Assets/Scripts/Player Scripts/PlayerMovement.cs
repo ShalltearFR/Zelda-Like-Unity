@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         if (playerSide.RuntimeValue == "Right") { animator.SetFloat("moveX", 1); animator.SetFloat("moveY", 0); }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (currentState == PlayerState.interact || currentState == PlayerState.bloquing) { return; }
 
