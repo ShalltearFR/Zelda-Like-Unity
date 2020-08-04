@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public Signal_Event playerHealthSignal;
     public StringValue playerSide;
     private CameraMovement cameraMovement;
+    private SaveManager saveManager;
 
     public bool isTakingObject = false;
     public GameObject takeObjectInstantiate;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.walk;
         playerRigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
 
         checkPlayerSide();
 
@@ -113,10 +115,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Si le joueur attaque à l'épée
                 StartCoroutine(AttackCo());
-            } else if (Input.GetButtonDown("RT") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
+            } else if (Input.GetButtonDown("RB") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
             {
                 // Si le joueur appuie sur RT (actuellement Y)
-                StartCoroutine(RTCo());
+                StartCoroutine(RBCo());
             }
             else if (Input.GetButtonDown("LT") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
             {
@@ -246,10 +248,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator RTCo()
+    private IEnumerator RBCo()
     {
-        // Si le touche RT est appuyé, lance pour cette fonction une flèche
-        if (playerInventory.itemsName.Contains("Sword"))
+        // Si le touche RB est appuyé, lance pour cette fonction une flèche
+        if (saveManager.selectedItem.RuntimeValue == "Bow")
         {
             currentState = PlayerState.attack;
 
@@ -266,6 +268,24 @@ public class PlayerMovement : MonoBehaviour
             if (currentState != PlayerState.interact && currentState != PlayerState.bloquing)
             { currentState = PlayerState.idle; }
         }
+
+        if (saveManager.selectedItem.RuntimeValue == "Boomerang")
+        {
+            if (GameObject.FindWithTag("Boomerang") == null)
+            {
+                animator.SetBool("FireBoomerang", true);
+                currentState = PlayerState.attack;
+
+                yield return null;
+                animator.SetBool("FireBoomerang", false);
+
+                yield return new WaitForSeconds(0.20f);
+                makeBoomerang();
+
+                yield return new WaitForSeconds(0.20f);
+                if (currentState != PlayerState.interact && currentState != PlayerState.bloquing) { currentState = PlayerState.idle; }
+            }
+        }
     }
 
     private void makeArrow()
@@ -278,6 +298,7 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator LTCo()
     {
+        /*
         // Si la touche LT est appuyé
         // Effectue pour cette fonction le lancement du boomerang
         if (playerInventory.itemsName.Contains("Sword"))
@@ -297,6 +318,8 @@ public class PlayerMovement : MonoBehaviour
                 if (currentState != PlayerState.interact && currentState != PlayerState.bloquing) { currentState = PlayerState.idle; }
             }
         }
+        */
+        yield return null;
     }
 
     private void makeBoomerang()
@@ -316,21 +339,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void RaiseItem(TreasureChest.TypeOfItem typeOfItem)
     {
+//        foreach (AnimatorControllerParameter parameter in GetComponent<Animator>().parameters)
+ //       {
+//            GetComponent<Animator>().SetBool(parameter.name, false);
+//        }
+
         // Change l'etat du joueur s'il ouvre un coffre
-        if (playerInventory.currentItem != null)
+        //        if (playerInventory.currentItem != null)
+        //        {
+        if (currentState != PlayerState.interact)
         {
-            if (currentState != PlayerState.interact)
-            {
                 animator.SetBool(typeOfItem.ToString(), true);
                 currentState = PlayerState.interact;
-            }
-            else
-            {
+        }
+        else
+        {
                 animator.SetBool(typeOfItem.ToString(), false);
                 currentState = PlayerState.idle;
                 playerInventory.currentItem = null;
-            }
         }
+//        }
     }
 
     void UpdateAnimationAndMove()

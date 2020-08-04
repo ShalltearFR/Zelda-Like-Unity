@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6908314793580644068}
   - component: {fileID: 6908314793580644067}
   - component: {fileID: 6908314793580644066}
-  - component: {fileID: 6908314793580644071}
   m_Layer: 11
   m_Name: Treasure Chest
   m_TagString: Untagged
@@ -50,6 +49,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -174,36 +175,10 @@ MonoBehaviour:
   contextOff: {fileID: 11400000, guid: 800695d0624324b4889ec9b5ce59c8a3, type: 2}
   playerInRange: 0
   typeOfItem: 1
+  ItemName: 
   contents: {fileID: 11400000, guid: 8f61acd0c1e3b1c47b5e62508f70ba67, type: 2}
   playerInventory: {fileID: 11400000, guid: 769cf0f56fdedb643bbc84ce3fbf59d1, type: 2}
   isOpen: 0
   raiseItem: {fileID: 11400000, guid: 3bd99a9645b917548865414c6aac7f02, type: 2}
   dialogBox: {fileID: 0}
   dialogText: {fileID: 0}
---- !u!114 &6908314793580644071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6908314793580644064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6c0d95825cecf8438311682b1cb6d78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 3bd99a9645b917548865414c6aac7f02, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6908314793580644066}
-        m_MethodName: animateChest
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

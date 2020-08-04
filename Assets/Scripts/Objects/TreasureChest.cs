@@ -52,11 +52,6 @@ public class TreasureChest : Interactable
         }
     }
 
-    public void animateChest()
-    {
-        playerMovement.RaiseItem(typeOfItem);
-    }
-
     public void OpenChest()
     {
         // Ouvre le contenu du coffre et l'ajoute dans l'inventaire du personnage
@@ -69,8 +64,10 @@ public class TreasureChest : Interactable
             audioSource.clip = Resources.Load<AudioClip>("Audio/SE/Treasure Chest");
             audioSource.Play();
         }
+
+        playerMovement.RaiseItem(typeOfItem);
         playerInventory.currentItem = contents;
-        raiseItem.Raise();
+        
         contextOn.Raise();
         isOpen = true;
         anim.SetBool("opened", true);
@@ -81,8 +78,7 @@ public class TreasureChest : Interactable
     {
         // Le coffre est deja ouvert donc desactive l'interraction avec le coffre
         dialogBox.SetActive(false);
-        
-        raiseItem.Raise();
+        playerMovement.RaiseItem(typeOfItem);
         enable = false;
         playerInRange = false;
         contextOff.Raise();

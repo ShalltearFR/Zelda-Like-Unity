@@ -838,7 +838,6 @@ MonoBehaviour:
   saveSlot: {fileID: 11400000, guid: 8871a33f7260b0a4097079af5c93ccf2, type: 2}
   isSlotEmpty: 000000
   cursorSlot: 0
-  onlyTeleport: {fileID: 11400000, guid: 6cade538326de5446a40cba5fa10b4f9, type: 2}
   slot1Save:
   - {fileID: 11400000, guid: e177c0f67a5a4754ca77486675cf8752, type: 2}
   - {fileID: 11400000, guid: 0ecec0339dd2c1c41878b2911d111b65, type: 2}
@@ -879,3 +878,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5fdef86384f995f43bee64ac6fee43ef, type: 2}
   - {fileID: 11400000, guid: ac0307e635039dc4c8756787c37b0171, type: 2}
   - {fileID: 11400000, guid: 6c198369118f7cb42b2d63abde4a0d68, type: 2}
+  onlyTeleport: {fileID: 11400000, guid: 6cade538326de5446a40cba5fa10b4f9, type: 2}
+  selectedItem: {fileID: 11400000, guid: 85927e6eeb502ea40ba1ce2bb3c0c150, type: 2}
+  itemDescriptionImage:
+  - {fileID: 21300000, guid: 80bf261f62bd828469b0c743db785cf5, type: 3}
+  - {fileID: 21300000, guid: 623d709ae9d3eec41b043b84ee135574, type: 3}

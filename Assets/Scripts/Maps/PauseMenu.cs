@@ -57,10 +57,13 @@ public class PauseMenu : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (!blockPause && !stopSpamAnimation && !isPause)
+            if (playermovement.currentState != PlayerMovement.PlayerState.interact)
             {
-                if (Input.GetButtonDown("Select"))
+                if (!blockPause && !stopSpamAnimation && !isPause)
+                {
+                    if (Input.GetButtonDown("Select"))
                     { StartCoroutine(pauseOn()); }
+                }
             }
         }
     }

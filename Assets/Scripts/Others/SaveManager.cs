@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Environment = System.Environment;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using System;
+using UnityEngine.UI;
 
 
 // objects[0] (asSword) n'est pas utilisé
@@ -15,12 +15,12 @@ public class SaveManager : MonoBehaviour
 {
     public string dataPath;
     public FloatValue saveSlot;
+
+    [Header("Menu Principal")]
     public bool[] isSlotEmpty = new bool[3];
     private Transform playerPos;
     public int cursorSlot;
     private int currentSlot = -1;
-    private GameObject activeMap;
-    public StringValue onlyTeleport;
 
     [Header("Slot 1")]
     public List<ScriptableObject> slot1Save = new List<ScriptableObject>();
@@ -33,6 +33,10 @@ public class SaveManager : MonoBehaviour
 
     [Header("Slot Temporaire")]
     public List<ScriptableObject> objects = new List<ScriptableObject>();
+    private GameObject activeMap;
+    public StringValue onlyTeleport;
+    public StringValue selectedItem;
+    public Sprite[] itemDescriptionImage;
 
     private void Awake()
     {
@@ -41,7 +45,7 @@ public class SaveManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            dataPath += "/my games/ZeldaLike/Save " + saveSlot.initialValue;
+            dataPath += "/my games/ZeldaLike/Save " + saveSlot.RuntimeValue;
         } else
         {
             dataPath += "/my games/ZeldaLike/";
@@ -251,7 +255,23 @@ public class SaveManager : MonoBehaviour
                     file.Close();
                 }
             }
-        }
+        } else { onlyTeleport.RuntimeValue = ""; }
         yield return null;
+    }
+
+    private void OnApplicationQuit()
+    {
+        selectedItem.RuntimeValue = "";
+        selectedItem.initialValue = "";
+        onlyTeleport.RuntimeValue = "";
+        onlyTeleport.initialValue = "";
+
+        Inventory inventory = objects[4] as Inventory;
+        inventory.items.Clear();
+        inventory.itemsName.Clear();
+        inventory.numberofKeys = 0;
+        inventory.rubis = 0;
+        inventory.rubisTemp = 0;
+        objects[4] = inventory;
     }
 }

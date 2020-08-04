@@ -14,9 +14,12 @@ public class InventoryHUD : MonoBehaviour
     private SoundManagement soundManagement;
     private SaveManager saveManager;
     private Inventory inventory;
+    private Image itemDescriptionImage;
+    private EventSystem eventSystem;
+    private Color color;
 
     public CanvasGroup BasicHUD;
-    public bool isPause;
+    public bool isInInventoryHUD;
     
 
     void Start()
@@ -26,6 +29,12 @@ public class InventoryHUD : MonoBehaviour
             animator = GetComponent<Animator>();
             playermovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
             soundManagement = GameObject.Find("Sound Manager").GetComponent<SoundManagement>();
+            saveManager = GameObject.Find("Save Manager").GetComponent<SaveManager>();
+            itemDescriptionImage = GameObject.Find("Item Description").GetComponent<Image>();
+            eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            color = GameObject.Find("Item HUD").GetComponent<Image>().color;
+
+            Invoke("InitItemBar",1f);
         }
     }
 
@@ -33,13 +42,16 @@ public class InventoryHUD : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
-            if (!stopSpamAnimation && !isPause)
+            if (playermovement.currentState != PlayerMovement.PlayerState.interact)
             {
-                if (Input.GetButtonDown("Start"))
-                { inventory = GameObject.Find("Save Manager").GetComponent<SaveManager>().objects[4] as Inventory; StartCoroutine(InventoryOn()); }
+                if (!stopSpamAnimation && !isInInventoryHUD)
+                {
+                    if (Input.GetButtonDown("Start"))
+                    { inventory = GameObject.Find("Save Manager").GetComponent<SaveManager>().objects[4] as Inventory; StartCoroutine(InventoryOn()); }
+                }
             }
 
-            if (!stopSpamAnimation && isPause)
+            if (!stopSpamAnimation && isInInventoryHUD)
             {
                 if (Input.GetButtonDown("Start"))
                 { StartCoroutine(InventoryOff()); }
@@ -52,7 +64,7 @@ public class InventoryHUD : MonoBehaviour
         // Procedure d'animation d'ouverture du menu d'inventaire
         // Changement d'etat du joueur et des mobs
         stopSpamAnimation = true;
-        isPause = true;
+        isInInventoryHUD = true;
 
         BasicHUD.alpha = 0;
 
@@ -73,25 +85,39 @@ public class InventoryHUD : MonoBehaviour
         playermovement.currentState = PlayerMovement.PlayerState.interact;
         animator.SetTrigger("open");
 
-        initInventory();
+        StartCoroutine(initInventory());
 
         // play sound ouverture menu
         soundManagement.soundEffectSource[4].clip = Resources.Load<AudioClip>("Audio/SE/Menu Open");
         soundManagement.soundEffectSource[4].Play();
 
-        // Mise en place du curseur
-        GameObject startSelectedButton = GameObject.Find("Continue");
-        EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        yield return new WaitForSeconds(0.05f);
-        eventSystem.SetSelectedGameObject(startSelectedButton);
 
+        
         yield return new WaitForSeconds(0.75f);
         stopSpamAnimation = false;
+        
     }
+
+    public void InitItemBar()
+    {
+        if (saveManager.selectedItem.RuntimeValue != "")
+        {
+            color.a = 1;
+            GameObject.Find("Item HUD").GetComponent<Image>().color = color;
+            GameObject.Find("Item HUD").GetComponent<Image>().sprite = GameObject.Find(saveManager.selectedItem.RuntimeValue).GetComponent<Image>().sprite;
+        } else
+        {
+            color.a = 0;
+            GameObject.Find("Item HUD").GetComponent<Image>().color = color;
+        }
+    }
+
 
     IEnumerator InventoryOff()
     {
         stopSpamAnimation = true;
+        isInInventoryHUD = false;
+
         // Procedure d'animation d'ouverture du menu de pause
         // Changement d'etat du joueur et des mobs
         EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
@@ -117,11 +143,11 @@ public class InventoryHUD : MonoBehaviour
             Animator playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>();
             playermovement.currentState = PlayerMovement.PlayerState.takeObject;
         }
-        isPause = false;
+
         stopSpamAnimation = false;
     }
 
-    private void initInventory()
+    private IEnumerator initInventory()
     {
         //Rend les images invisible
         Image[] imagesChild = transform.GetChild(1).GetComponentsInChildren<Image>();
@@ -142,6 +168,7 @@ public class InventoryHUD : MonoBehaviour
             buttonChild[i].interactable = false;
         }
 
+        // Detection d'inventaire et activation des boutons item
         if (inventory.itemsName.Contains("Boomerang"))
         {
             Color imagesChildColor = imagesChild[0].color;
@@ -158,16 +185,49 @@ public class InventoryHUD : MonoBehaviour
             transform.GetChild(1).GetChild(1).GetComponent<Button>().interactable = true;
         }
 
+        yield return null;
 
+        if (saveManager.selectedItem.RuntimeValue == "")
+        {
+            bool isCursorSelected = false;
+            //Initialise le curseur sur le 1er item
+            if (!isCursorSelected && transform.GetChild(1).GetChild(0).GetComponent<Image>().color.a == 1)
+            {
+                StartCoroutine(SetCursor(transform.GetChild(1).GetChild(0).gameObject));
+                isCursorSelected = true;
+            }
 
+            if (!isCursorSelected && transform.GetChild(1).GetChild(1).GetComponent<Image>().color.a == 1)
+            {
+                StartCoroutine(SetCursor(transform.GetChild(1).GetChild(1).gameObject));
+                isCursorSelected = true;
+            }
+        } else { StartCoroutine(SetCursor(GameObject.Find(saveManager.selectedItem.RuntimeValue))); } // Initialise le curseur sur l'item equipé
 
+        yield return new WaitForSeconds(0.5f);
 
+        // Si pas d'item dans l'inventaire
+        // Alpha de l'item description à 0 sinon alpha à 1
+        Color imagesColor = itemDescriptionImage.color;
+        if (saveManager.selectedItem.RuntimeValue == "")
+        {
+            imagesColor.a = 0;
+            itemDescriptionImage.color = imagesColor;
+        }
+        else
+        {
+            imagesColor.a = 1;
+            itemDescriptionImage.color = imagesColor;
+        }
 
-
-
-
-
+        InitItemBar();
     }
 
+
+    private IEnumerator SetCursor(GameObject button)
+    {
+        yield return new WaitForSeconds(0.05f);
+        eventSystem.SetSelectedGameObject(button);
+    }
 
 }
