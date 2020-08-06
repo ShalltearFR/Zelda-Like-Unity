@@ -29,12 +29,21 @@ public class TreasureChest : Interactable
     private Animator anim;
     private PlayerMovement playerMovement;
     private AudioSource audioSource;
+    public int numberOfChest;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         audioSource = GameObject.FindWithTag("SoundManager").GetComponent<SoundManagement>().soundEffectSource[0];
+
+        BoolArrayValue chestBool = GameObject.Find("Save Manager").GetComponent<SaveManager>().objects[9] as BoolArrayValue;
+        if (chestBool.initialValue[numberOfChest])
+        {
+            isOpen = true;
+            anim.SetBool("opened", true);
+        }
+
     }
     private void Update()
     {
@@ -58,6 +67,11 @@ public class TreasureChest : Interactable
         dialogBox.SetActive(true);
         dialogText.text = contents.itemDescription;
         playerInventory.AddItem(contents,typeOfItem);
+
+        // Sauvegarde le coffre indiquant qu'il a deja été ouvert
+        BoolArrayValue chestBool = GameObject.Find("Save Manager").GetComponent<SaveManager>().objects[9] as BoolArrayValue;
+        chestBool.initialValue[numberOfChest] = true;
+        GameObject.Find("Save Manager").GetComponent<SaveManager>().objects[9] = chestBool;
 
         if (typeOfItem == TypeOfItem.FullHeart || typeOfItem == TypeOfItem.Grappin || typeOfItem == TypeOfItem.Boomerang || typeOfItem == TypeOfItem.Bow || typeOfItem == TypeOfItem.Sword)
         {

@@ -3,12 +3,12 @@
 [CreateAssetMenu]
 [System.Serializable]
 
-public class BoolValue : ScriptableObject, ISerializationCallbackReceiver
+public class BoolArrayValue : ScriptableObject, ISerializationCallbackReceiver
 {
-    public bool initialValue;
+    public bool[] initialValue;
 
     [HideInInspector]
-    public bool RuntimeValue;
+    public bool[] RuntimeValue;
 
     public void OnAfterDeserialize()
     {

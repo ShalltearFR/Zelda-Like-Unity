@@ -273,5 +273,12 @@ public class SaveManager : MonoBehaviour
         inventory.rubis = 0;
         inventory.rubisTemp = 0;
         objects[4] = inventory;
+
+        BoolArrayValue tresureChest = objects[9] as BoolArrayValue;
+        int i;
+        for (i = 0; i < tresureChest.initialValue.Length; i++)
+        {
+            tresureChest.initialValue[i] = false;
+        }
     }
 }
