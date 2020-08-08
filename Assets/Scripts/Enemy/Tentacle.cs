@@ -58,28 +58,31 @@ public class Tentacle : Enemy
 
     private void RandomlyMovement()
     {
-        // Fonction permettant de deplacer aléatoirement le mob
-        if (randomPositifOrNegatifX == 1 && randomPositifOrNegatifY == 1)
+        if (!isDamage)
         {
-            randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + randomNumberX, transform.position.y + randomNumberY, 0), 0.01f);
-        }
+            // Fonction permettant de deplacer aléatoirement le mob
+            if (randomPositifOrNegatifX == 1 && randomPositifOrNegatifY == 1)
+            {
+                randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + randomNumberX, transform.position.y + randomNumberY, 0), 0.01f);
+            }
 
-        if (randomPositifOrNegatifX == 0 && randomPositifOrNegatifY == 1)
-        {
-            randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - randomNumberX, transform.position.y + randomNumberY, 0), 0.01f);
-        }
+            if (randomPositifOrNegatifX == 0 && randomPositifOrNegatifY == 1)
+            {
+                randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - randomNumberX, transform.position.y + randomNumberY, 0), 0.01f);
+            }
 
-        if (randomPositifOrNegatifX == 1 && randomPositifOrNegatifY == 0)
-        {
-            randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + randomNumberX, transform.position.y - randomNumberY, 0), 0.01f);
-        }
+            if (randomPositifOrNegatifX == 1 && randomPositifOrNegatifY == 0)
+            {
+                randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + randomNumberX, transform.position.y - randomNumberY, 0), 0.01f);
+            }
 
-        if (randomPositifOrNegatifX == 0 && randomPositifOrNegatifY == 0)
-        {
-            randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - randomNumberX, transform.position.y - randomNumberY, 0), 0.01f);
-        }
+            if (randomPositifOrNegatifX == 0 && randomPositifOrNegatifY == 0)
+            {
+                randomlyMovingAnimation = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - randomNumberX, transform.position.y - randomNumberY, 0), 0.01f);
+            }
 
-        myRigidBody.MovePosition(randomlyMovingAnimation);
+            myRigidBody.MovePosition(randomlyMovingAnimation);
+        }
     }
 
     private void CheckDistance()

@@ -46,6 +46,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -356,6 +358,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -379,7 +383,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 22120861
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7487934730291781765, guid: a05f3a0271929214bbe08e8156dbf074,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -505,6 +509,8 @@ MonoBehaviour:
     type: 3}
   Boomerang: {fileID: 2784652143810609777, guid: 364aac73a9bd1fd438867267b5dc5d31,
     type: 3}
+  bombPlaced: {fileID: 6408100784358684840, guid: d227f96e3e43c9540b314ffe10084c29,
+    type: 3}
 --- !u!61 &1170813810092817873
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -580,6 +586,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2858384194343857569}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Enable
         m_Mode: 1
         m_Arguments:
@@ -607,6 +614,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2858384194343857569}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Disable
         m_Mode: 1
         m_Arguments:

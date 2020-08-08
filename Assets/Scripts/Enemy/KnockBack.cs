@@ -47,16 +47,19 @@ public class KnockBack : MonoBehaviour
             // Si le joueur lance un objet sur un ennemis
             if (other.gameObject.CompareTag("Enemy") && this.gameObject.CompareTag("TakeObject"))
             {
-                Rigidbody2D effect = other.GetComponent<Rigidbody2D>();
-                if (effect != null)
+                if (other.isTrigger)
                 {
-                    other.GetComponent<Enemy>().stopFreezing = true;
-                      Vector2 difference = effect.transform.position - transform.position;
-                    difference = difference.normalized * thrust;
-                    effect.AddForce(difference, ForceMode2D.Impulse);
+                    Rigidbody2D effect = other.GetComponent<Rigidbody2D>();
+                    if (effect != null)
+                    {
+                        other.GetComponent<Enemy>().stopFreezing = true;
+                        Vector2 difference = effect.transform.position - transform.position;
+                        difference = difference.normalized * thrust;
+                        effect.AddForce(difference, ForceMode2D.Impulse);
 
-                    effect.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                    other.GetComponent<Enemy>().Knock(effect, knockTime, damage, typeOfMob);
+                        effect.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                        other.GetComponent<Enemy>().Knock(effect, knockTime, damage, typeOfMob);
+                    }
                 }
             }
 
@@ -75,8 +78,11 @@ public class KnockBack : MonoBehaviour
                         // Si on frappe l'ennemis
                         if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
                         {
-                            hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
-                            other.GetComponent<Enemy>().Knock(hit, knockTime, damage, typeOfMob);
+                            if (other.isTrigger)
+                            {
+                                hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                                other.GetComponent<Enemy>().Knock(hit, knockTime, damage, typeOfMob);
+                            }
                         }
 
                         // Si l'ennemis frappe le joueur

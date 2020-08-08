@@ -272,6 +272,8 @@ public class SaveManager : MonoBehaviour
         inventory.numberofKeys = 0;
         inventory.rubis = 0;
         inventory.rubisTemp = 0;
+        inventory.bomb = 0;
+        inventory.arrow = 0;
         objects[4] = inventory;
 
         BoolArrayValue tresureChest = objects[9] as BoolArrayValue;

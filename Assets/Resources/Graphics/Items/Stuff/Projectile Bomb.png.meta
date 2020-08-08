@@ -1,0 +1,454 @@
+fileFormatVersion: 2
+guid: ef98b5b9f381cb24c941c9bbe205291f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6725819950346549155
+    second: Projectile Bomb_0
+  - first:
+      213: -7078418963389333065
+    second: Projectile Bomb_0
+  - first:
+      213: 8037774424954869135
+    second: Projectile Bomb_1
+  - first:
+      213: 3475148888191755362
+    second: Projectile Bomb_2
+  - first:
+      213: 8602734114581905797
+    second: Projectile Bomb_4
+  - first:
+      213: -1710108438960127341
+    second: Projectile Bomb_3
+  - first:
+      213: -1537552726141592633
+    second: Projectile Bomb_6
+  - first:
+      213: 3183010127130108919
+    second: Projectile Bomb_5
+  - first:
+      213: -1962556402383138007
+    second: Projectile Bomb_6
+  - first:
+      213: 5102533507855836117
+    second: Projectile Bomb_7
+  - first:
+      213: -3853766173906991035
+    second: Projectile Bomb_10
+  - first:
+      213: 8084804739769103051
+    second: Projectile Bomb_8
+  - first:
+      213: 8164191399777317672
+    second: Projectile Bomb_9
+  - first:
+      213: -718956228914083877
+    second: Projectile Bomb_11
+  - first:
+      213: -2113367370225856294
+    second: Projectile Bomb_10
+  - first:
+      213: -398680276410689626
+    second: Projectile Bomb_15
+  - first:
+      213: -6525721318050565346
+    second: Projectile Bomb_16
+  - first:
+      213: -4710595996307458130
+    second: Projectile Bomb_17
+  - first:
+      213: 163357849413350075
+    second: Projectile Bomb_18
+  - first:
+      213: 3953958929371206684
+    second: Projectile Bomb_19
+  - first:
+      213: 8082582224955987534
+    second: Projectile Bomb_20
+  - first:
+      213: 802577584348604336
+    second: Projectile Bomb_21
+  - first:
+      213: 122749605191260304
+    second: Projectile Bomb_22
+  - first:
+      213: 7616273553946885318
+    second: Projectile Bomb_0
+  - first:
+      213: 7007496620753841321
+    second: Projectile Bomb_1
+  - first:
+      213: -7787154734048252059
+    second: Projectile Bomb_2
+  - first:
+      213: -7052604990829795115
+    second: Projectile Bomb_3
+  - first:
+      213: -2206816632153915336
+    second: Projectile Bomb_4
+  - first:
+      213: 5559940362359611091
+    second: Projectile Bomb_5
+  - first:
+      213: -2542311904454233898
+    second: Projectile Bomb_6
+  - first:
+      213: 2374413295416704235
+    second: Projectile Bomb_7
+  - first:
+      213: -80083789060865577
+    second: Projectile Bomb_8
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Projectile Bomb_0
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 378
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ccb43fc17072b960800000000000000
+      internalID: 7616273553946885318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_1
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 378
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac68cc9c01af3160800000000000000
+      internalID: 7007496620753841321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_2
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 378
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56f6d0a07087ee390800000000000000
+      internalID: -7787154734048252059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_3
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 378
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d8617c802d102e90800000000000000
+      internalID: -7052604990829795115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_4
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 265
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 830ca0c17ffcf51e0800000000000000
+      internalID: -2206816632153915336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_5
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 265
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3de1dce3d40e82d40800000000000000
+      internalID: 5559940362359611091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_6
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 154
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d032caeac4e7bcd0800000000000000
+      internalID: -2542311904454233898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 154
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: becf64fdf4c93f020800000000000000
+      internalID: 2374413295416704235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_8
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 154
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d182c8d73c73eef0800000000000000
+      internalID: -80083789060865577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_9
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 154
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 823b60682d80d4170800000000000000
+      internalID: 8164191399777317672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_11
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 49
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd785867e11c506f0800000000000000
+      internalID: -718956228914083877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 48
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad059c9e29fcba2e0800000000000000
+      internalID: -2113367370225856294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

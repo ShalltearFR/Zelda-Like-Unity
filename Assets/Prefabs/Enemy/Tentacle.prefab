@@ -51,6 +51,8 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -74,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 22120861
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -8476129402846991154, guid: 29dff47c4cfc1f24c84ff77fccddc0fa,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -202,6 +204,9 @@ MonoBehaviour:
   sr: {fileID: 0}
   isActuallyRandomMoving: 0
   thisLoot: {fileID: 11400000, guid: e37660f0394cf094886903a399b54db8, type: 2}
+  isEnemyFreeze: 0
+  stopFreezing: 0
+  isDamage: 0
   target: {fileID: 0}
   chaseRadius: 5
   attackRadius: 0.15
@@ -223,3 +228,4 @@ MonoBehaviour:
   knockTime: 0.2
   damage: 1
   typeOfMob: 0
+  isEnable: 1

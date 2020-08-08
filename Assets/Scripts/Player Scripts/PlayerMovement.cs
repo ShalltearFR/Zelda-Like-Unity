@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer receivedItemSprite;
 
-    public Object[] soundsEffect;
+    public UnityEngine.Object[] soundsEffect;
     private AudioSource audioSource;
     private AudioSource audioSourceLinkAttack;
 
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject projectile;
     public GameObject Boomerang;
+    public GameObject bombPlaced;
 
     void Start()
     {
@@ -272,7 +275,6 @@ public class PlayerMovement : MonoBehaviour
                 playerInventory.arrow -= 1;
                 GameObject.Find("Arrow HUD").GetComponent<ArrowTextManager>().UpdateArrowCount();
             }
-
         }
 
         if (saveManager.selectedItem.RuntimeValue == "Boomerang")
@@ -291,6 +293,20 @@ public class PlayerMovement : MonoBehaviour
                 yield return new WaitForSeconds(0.20f);
                 if (currentState != PlayerState.interact && currentState != PlayerState.bloquing) { currentState = PlayerState.idle; }
             }
+        }
+
+        if (saveManager.selectedItem.RuntimeValue == "Bomb")
+        {
+            if (playerInventory.bomb > 0)
+            {
+                // Oriente la bombe suivant la direction du joueur
+                Vector2 direction = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+                GameObject bomb = Instantiate(bombPlaced, new Vector3((transform.position.x + direction.x), (transform.position.y + direction.y), -3), Quaternion.identity);
+
+                playerInventory.bomb -= 1;
+                GameObject.Find("Bomb HUD").GetComponent<BombTextManager>().UpdateBombCount();
+            }
+
         }
     }
 
@@ -446,21 +462,24 @@ public class PlayerMovement : MonoBehaviour
         {
             audioSource.clip = soundsEffect[4] as AudioClip;
             audioSource.Play();
+            float speedDump = 0;
+            if (mobGameObject.CompareTag("Enemy"))
+            {
+                speedDump = mobGameObject.GetComponent<Enemy>().moveSpeed;
+                mobGameObject.GetComponent<Enemy>().moveSpeed = 0;
+            }
 
-            float speedDump = mobGameObject.GetComponent<Enemy>().moveSpeed;
-            mobGameObject.GetComponent<Enemy>().moveSpeed = 0;
             yield return new WaitForSeconds(knockTime);
             playerRigidBody.velocity = Vector2.zero;
             yield return new WaitForSeconds(0.25f);
-
+            playerRigidBody.velocity = Vector2.zero;
             // Si le joueur possède un objet, remet sur l'etat "takeObject"
             // S'il ne porte rien, le remet en idle
             if (isInTakeObjectState)
             { currentState = PlayerState.takeObject; }
             else { currentState = PlayerState.idle; }
-            
-            mobGameObject.GetComponent<Enemy>().moveSpeed = speedDump;
-            playerRigidBody.velocity = Vector2.zero;
+
+            if (mobGameObject.CompareTag("Enemy")) { mobGameObject.GetComponent<Enemy>().moveSpeed = speedDump; }
         }
     }
 

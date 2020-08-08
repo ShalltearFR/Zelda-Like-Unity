@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     public LootTable thisLoot;
     public bool isEnemyFreeze = false;
     public bool stopFreezing = false;
+    public bool isDamage = false;
 
     private float[] enemyStats = new float[3];
     private int i;
@@ -245,16 +246,18 @@ public class Enemy : MonoBehaviour
     private IEnumerator KnockCo(Rigidbody2D myRigidbody, float knockTime)
     {
         // Effectue le recul du gameobject
-        if (myRigidbody != null)
-        {
-            stopFreezing = true;
-            DeFreeze();
+        stopFreezing = true;
+        
+        float moveSpeedDump = moveSpeed;
+        moveSpeed = 0;
 
-            yield return new WaitForSeconds(knockTime);
-            myRigidbody.velocity = Vector2.zero;
-            yield return new WaitForSeconds(0.5f);
-            myRigidbody.GetComponent<Enemy>().currentState = EnemyState.idle;
-            myRigidbody.velocity = Vector2.zero;
-        }
+        DeFreeze();
+        yield return new WaitForSeconds(knockTime);
+        myRigidbody.velocity = Vector2.zero;
+        yield return new WaitForSeconds(0.5f);
+        myRigidbody.GetComponent<Enemy>().currentState = EnemyState.idle;
+        myRigidbody.velocity = Vector2.zero;
+        moveSpeed = moveSpeedDump;
+        isDamage = false;
     }
 }
