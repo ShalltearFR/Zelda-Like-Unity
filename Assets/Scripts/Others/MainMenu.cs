@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Linq;
 
 public class MainMenu : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class MainMenu : MonoBehaviour
     public GameObject menu1;
     public Animator pressStart;
     public Animator options;
+    public TMP_Dropdown resolutionDropdown;
+    public List<int> widthResolution = new List<int>();
+    public List<int> heightResolution = new List<int>();
 
     [Header("Verification du menu actif")]
     public bool isPressStart;
@@ -49,6 +53,77 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(CheckSlots());
         textPanel = GameObject.Find("TextPanel");
         sceneTransition = GameObject.Find("Canvas").GetComponent<SceneTransition>();
+
+        StartCoroutine(GetResolutions());
+    }
+
+    private IEnumerator GetResolutions()
+    {
+        // Nettoie la liste
+        resolutionDropdown.ClearOptions();
+        widthResolution.Clear();
+        heightResolution.Clear();
+
+        widthResolution.Add(1);
+        heightResolution.Add(2);
+
+        yield return new WaitForSeconds(0.5f);
+        // Récupère les resolutions 16/9 et 4/3 de l'ecran
+        List<string> resolutionsList = new List<string>();
+        resolutionsList.Add("start");
+
+        float[] actualResolutionArray = new float[2];
+
+        Resolution[] resolutions = Screen.resolutions;
+        foreach (var res in resolutions)
+        {
+            float width = res.width;
+            float height = res.height;
+            double ratio = System.Math.Round(width / height, 5);
+
+            if (ratio == 1.77778) { // 16/9 resolutions
+                if (widthResolution[(widthResolution.Count - 1)] != width && heightResolution[(heightResolution.Count - 1)] != height)
+                {
+                    resolutionsList.Add(width + " x " + height + " (16/9)");
+                    widthResolution.Add(Convert.ToInt32(width));
+                    heightResolution.Add(Convert.ToInt32(height));
+                    if (Convert.ToInt32(width) == Screen.width) { actualResolutionArray[0] = width; }
+                }
+            }
+            if (ratio == 1.33333) { // 4/3 resolutions
+                if (widthResolution[(widthResolution.Count - 1)] != width && heightResolution[(heightResolution.Count - 1)] != height)
+                {
+                    resolutionsList.Add(width + " x " + height + " (4/3)");
+                    widthResolution.Add(Convert.ToInt32(width));
+                    heightResolution.Add(Convert.ToInt32(height));
+                    if (Convert.ToInt32(height) == Screen.height) { actualResolutionArray[1] = height; }
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(1f);
+        widthResolution.Remove(1);
+        heightResolution.Remove(2);
+        resolutionsList.Remove("start");
+        resolutionDropdown.AddOptions(resolutionsList);
+
+        string actualRatioName = "";
+        float actualWidth = Screen.width;
+        float actualHeight = Screen.height;
+        double actualRatio = System.Math.Round(actualWidth / actualHeight, 5);
+
+        if (actualRatio == 1.77778) { actualRatioName = " (16/9)"; } // 16/9 resolutions
+        if (actualRatio == 1.33333) { actualRatioName = " (4/3)"; } // 4/3 resolutions
+
+        // Recherche la value du dropDown portant la résolution actuel
+        int index = resolutionDropdown.options.FindIndex((i) => { return i.text.Equals(Screen.width + " x " + Screen.height + actualRatioName); });
+        resolutionDropdown.value = index;
+    }
+
+    public void ResolutionSelection()
+    {
+        Screen.SetResolution(widthResolution[resolutionDropdown.value], heightResolution[resolutionDropdown.value], true);
+        Debug.Log("Resolution en " + widthResolution[resolutionDropdown.value] + " x " + heightResolution[resolutionDropdown.value]);
     }
 
     IEnumerator CheckSlots()
@@ -278,9 +353,7 @@ public class MainMenu : MonoBehaviour
 
         options.GetComponent<Animator>().SetTrigger("Open");
         yield return new WaitForSeconds(0.05f);
-        eventSystem.SetSelectedGameObject(GameObject.Find("Options"));
-        yield return new WaitForSeconds(0.35f);
-        eventSystem.SetSelectedGameObject(GameObject.Find("Music Slider"));
+        eventSystem.SetSelectedGameObject(GameObject.Find("Resolution Dropdown"));
         isInOptions = true;
     }
 

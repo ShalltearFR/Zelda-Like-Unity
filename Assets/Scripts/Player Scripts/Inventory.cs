@@ -13,6 +13,8 @@ public class Inventory : ScriptableObject
     public int numberofKeys;
     public int rubis;
     public int rubisTemp;
+    public int arrow;
+    public int bomb;
 
     public void AddItem(Item itemToAdd, TreasureChest.TypeOfItem typeOfItem)
     {

@@ -62,13 +62,14 @@ public class SoundButton : MonoBehaviour
 
         if (gameObject.name == "Boomerang") { cursorItem.RuntimeValue = "Boomerang"; }
         if (gameObject.name == "Bow") { cursorItem.RuntimeValue = "Bow"; }
+        if (gameObject.name == "Bomb") { cursorItem.RuntimeValue = "Bomb"; }
 
         saveManager.selectedItem = cursorItem;
 
         // Affiche la description de l'item dans le menu d'inventaire
-
         if (cursorItem.RuntimeValue == "Boomerang") { itemDescription.sprite = saveManager.itemDescriptionImage[0]; }
         if (cursorItem.RuntimeValue == "Bow") { itemDescription.sprite = saveManager.itemDescriptionImage[1]; }
+        if (cursorItem.RuntimeValue == "Bomb") { itemDescription.sprite = saveManager.itemDescriptionImage[2]; }
 
         inventoryHUD.InitItemBar();
     }

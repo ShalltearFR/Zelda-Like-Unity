@@ -185,23 +185,41 @@ public class InventoryHUD : MonoBehaviour
             transform.GetChild(1).GetChild(1).GetComponent<Button>().interactable = true;
         }
 
+        if (inventory.itemsName.Contains("Bomb"))
+        {
+            Color imagesChildColor = imagesChild[2].color;
+            imagesChildColor.a = 1;
+            transform.GetChild(1).GetChild(2).GetComponent<Image>().color = imagesChildColor;
+            transform.GetChild(1).GetChild(2).GetComponent<Button>().interactable = true;
+        }
+
         yield return null;
 
         if (saveManager.selectedItem.RuntimeValue == "")
         {
             bool isCursorSelected = false;
             //Initialise le curseur sur le 1er item
+            // Boomerang
             if (!isCursorSelected && transform.GetChild(1).GetChild(0).GetComponent<Image>().color.a == 1)
             {
                 StartCoroutine(SetCursor(transform.GetChild(1).GetChild(0).gameObject));
                 isCursorSelected = true;
             }
 
+            // Arrow
             if (!isCursorSelected && transform.GetChild(1).GetChild(1).GetComponent<Image>().color.a == 1)
             {
                 StartCoroutine(SetCursor(transform.GetChild(1).GetChild(1).gameObject));
                 isCursorSelected = true;
             }
+
+            // Bomb
+            if (!isCursorSelected && transform.GetChild(1).GetChild(2).GetComponent<Image>().color.a == 1)
+            {
+                StartCoroutine(SetCursor(transform.GetChild(1).GetChild(2).gameObject));
+                isCursorSelected = true;
+            }
+            isCursorSelected = false;
         } else { StartCoroutine(SetCursor(GameObject.Find(saveManager.selectedItem.RuntimeValue))); } // Initialise le curseur sur l'item equipé
 
         yield return new WaitForSeconds(0.5f);

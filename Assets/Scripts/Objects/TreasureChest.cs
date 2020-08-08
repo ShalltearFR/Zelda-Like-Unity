@@ -9,7 +9,7 @@ public class TreasureChest : Interactable
     {
         Key,
         Sword,
-        Bombe,
+        Bomb,
         Boomerang,
         Boussole,
         Map,
@@ -86,6 +86,9 @@ public class TreasureChest : Interactable
         isOpen = true;
         anim.SetBool("opened", true);
         contextOff.Raise();
+
+        if (typeOfItem == TypeOfItem.Bow) { playerInventory.arrow = 30; GameObject.Find("Arrow HUD").GetComponent<ArrowTextManager>().UpdateArrowCount(); }
+        if (typeOfItem == TypeOfItem.Bomb) { playerInventory.bomb = 10; GameObject.Find("Bomb HUD").GetComponent<BombTextManager>().UpdateBombCount(); }
     }
 
     public void ChestAlreadyOpen()

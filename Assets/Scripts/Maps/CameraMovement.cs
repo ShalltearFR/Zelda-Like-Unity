@@ -45,7 +45,6 @@ public class CameraMovement : MonoBehaviour
 
     private void GetActiveMap()
     {
-        //GameObject.Find("Main Camera").transform.position = target.position;
         // Recupere le nom de la map
         if (saveManager.onlyTeleport.RuntimeValue == "")
         {
@@ -66,8 +65,6 @@ public class CameraMovement : MonoBehaviour
 
     private void Init()
     {
-        //        Debug.Log(ScreenResolution);
-
         if (activeMap == null) { activeMap = GameObject.Find("Map1"); }
 
         // Recupère les valeur x/y min/max sur la map active
@@ -132,7 +129,6 @@ public class CameraMovement : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().currentState = PlayerMovement.PlayerState.idle;
     }
-
 
     public void RefreshCamLimit(GameObject gameobject)
     {

@@ -253,20 +253,26 @@ public class PlayerMovement : MonoBehaviour
         // Si le touche RB est appuyé, lance pour cette fonction une flèche
         if (saveManager.selectedItem.RuntimeValue == "Bow")
         {
-            currentState = PlayerState.attack;
+            if (playerInventory.arrow > 0)
+            {
+                currentState = PlayerState.attack;
 
-            animator.SetBool("FireBow", true);
+                animator.SetBool("FireBow", true);
 
-            yield return null;
-            animator.SetBool("FireBow", false);
-            yield return new WaitForSeconds(0.40f);
-            audioSourceLinkAttack.clip = Resources.Load<AudioClip>("Audio/SE/Arrow");
-            audioSourceLinkAttack.Play();
+                yield return null;
+                animator.SetBool("FireBow", false);
+                yield return new WaitForSeconds(0.40f);
+                audioSourceLinkAttack.clip = Resources.Load<AudioClip>("Audio/SE/Arrow");
+                audioSourceLinkAttack.Play();
 
-            makeArrow();
-            yield return new WaitForSeconds(0.20f);
-            if (currentState != PlayerState.interact && currentState != PlayerState.bloquing)
-            { currentState = PlayerState.idle; }
+                makeArrow();
+                yield return new WaitForSeconds(0.20f);
+                if (currentState != PlayerState.interact && currentState != PlayerState.bloquing)
+                { currentState = PlayerState.idle; }
+                playerInventory.arrow -= 1;
+                GameObject.Find("Arrow HUD").GetComponent<ArrowTextManager>().UpdateArrowCount();
+            }
+
         }
 
         if (saveManager.selectedItem.RuntimeValue == "Boomerang")
