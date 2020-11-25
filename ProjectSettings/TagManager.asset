@@ -17,6 +17,9 @@ TagManager:
   - MusicManager
   - Wall
   - Chest
+  - Heart
+  - Rubis
+  - Boomerang
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-
     private SoundManagement soundManagement;
     public float thrust;
     public float knockTime;
@@ -38,7 +37,6 @@ public class Bomb : MonoBehaviour
         {
             if (other.isTrigger)
             {
-                Debug.Log("joueur touché");
                 Rigidbody2D hit = other.GetComponent<Rigidbody2D>();
                 bool isInTakeObjectState = false;
 
@@ -46,7 +44,17 @@ public class Bomb : MonoBehaviour
                 difference = difference.normalized * thrust;
                 other.GetComponent<Rigidbody2D>().AddForce(difference, ForceMode2D.Impulse);
 
-                if (hit.GetComponent<PlayerMovement>().currentState == PlayerMovement.PlayerState.takeObject) { isInTakeObjectState = true; }
+                if (hit.GetComponent<PlayerMovement>().currentState == PlayerMovement.PlayerState.takeObject)
+                {
+                    if (!other.GetComponent<Animator>().GetBool("TakingBomb")) { isInTakeObjectState = true; }
+                }
+
+                if (other.GetComponent<Animator>().GetBool("TakingBomb"))
+                {
+                    other.GetComponent<Animator>().SetBool("TakingBomb", false);
+                    GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().speed = 6;
+                    other.GetComponent<PlayerMovement>().currentState = PlayerMovement.PlayerState.idle;
+                }
 
                 if (other.GetComponent<PlayerMovement>().currentState != PlayerMovement.PlayerState.stagger)
                 {

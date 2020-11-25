@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Bool", menuName = "Value/Bool")]
 [System.Serializable]
 
 public class BoolValue : ScriptableObject, ISerializationCallbackReceiver

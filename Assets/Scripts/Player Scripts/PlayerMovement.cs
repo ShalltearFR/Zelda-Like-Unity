@@ -147,6 +147,11 @@ public class PlayerMovement : MonoBehaviour
                     StartCoroutine(LaunchObject());
                 }
             }
+
+            if (animator.GetBool("TakingBomb") && Input.GetButtonDown("Interract"))
+            {
+                StartCoroutine(LaunchObject());
+            }
         }
     }
 
@@ -157,6 +162,28 @@ public class PlayerMovement : MonoBehaviour
 
         if (breackSpamming)
         {
+            if (animator.GetBool("TakingBomb"))
+            {
+                isTakingObject = true;
+                if (isTakingObject)
+                {
+                    speed = 0;
+                    currentState = PlayerState.bloquing;
+                    animator.SetBool("LaunchBomb", true);
+                    yield return null;
+                    animator.SetBool("LaunchBomb", false);
+                    animator.SetBool("TakingBomb", false);
+                    yield return new WaitForSeconds(0.35f);
+                    currentState = PlayerState.idle;
+                    if (transform.GetChild(5).transform.GetChild(0).transform != null)
+                    {
+                        transform.GetChild(5).transform.GetChild(0).transform.SetParent(null);
+                    }
+                    speed = 6;
+                    isTakingObject = false;
+                }
+            }
+
             if (takeObjectString == "Sign")
             {
                 // Si c'est une pancarte
@@ -181,9 +208,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(0.37f);
-                
                 animator.SetBool("LaunchPot&Sign", false);
-
                 yield return null;
 
                 isTakingObject = false;
@@ -218,15 +243,12 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 yield return new WaitForSeconds(0.37f);
-
                 animator.SetBool("LaunchPot&Sign", false);
-
                 yield return null;
 
                 isTakingObject = false;
                 currentState = PlayerState.idle;
                 speed = 6;
-
                 breackSpamming = false;
             }
         }
@@ -471,7 +493,7 @@ public class PlayerMovement : MonoBehaviour
 
             yield return new WaitForSeconds(knockTime);
             playerRigidBody.velocity = Vector2.zero;
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.35f);
             playerRigidBody.velocity = Vector2.zero;
             // Si le joueur possède un objet, remet sur l'etat "takeObject"
             // S'il ne porte rien, le remet en idle
@@ -479,12 +501,19 @@ public class PlayerMovement : MonoBehaviour
             { currentState = PlayerState.takeObject; }
             else { currentState = PlayerState.idle; }
 
-            if (mobGameObject.CompareTag("Enemy")) { mobGameObject.GetComponent<Enemy>().moveSpeed = speedDump; }
+            if (mobGameObject != null)
+            {
+                if (mobGameObject.CompareTag("Enemy")) { mobGameObject.GetComponent<Enemy>().moveSpeed = speedDump; }
+            }
         }
     }
 
     IEnumerator DamageAnimation()
     {
+        animator.SetBool("Damage", true);
+        yield return null;
+        animator.SetBool("Damage", false);
+
         // Animation de flash du personnage quand il prend des degats
         int i;
         for (i = 0; i < 6; i++)

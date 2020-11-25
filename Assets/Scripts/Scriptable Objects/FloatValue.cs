@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Float", menuName = "Value/Float")]
 [System.Serializable]
 
 public class FloatValue : ScriptableObject

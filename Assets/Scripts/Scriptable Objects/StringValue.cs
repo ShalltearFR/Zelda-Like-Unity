@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "String", menuName = "Value/String")]
 
 public class StringValue : ScriptableObject, ISerializationCallbackReceiver
 {

@@ -1,0 +1,685 @@
+fileFormatVersion: 2
+guid: 593f279890b55a04d94610c67673f362
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3293506435764874812
+    second: LiftingBomb_0
+  - first:
+      213: 3277819066384753175
+    second: WalkingBomb_0
+  - first:
+      213: 9073301287616659095
+    second: WalkingBomb_1
+  - first:
+      213: -4397998279877623159
+    second: WalkingBomb_2
+  - first:
+      213: 84957672952862991
+    second: WalkingBomb_3
+  - first:
+      213: 2131802446742577677
+    second: WalkingBomb_4
+  - first:
+      213: 2863375271526456732
+    second: WalkingBomb_5
+  - first:
+      213: -689403349338394898
+    second: WalkingBomb_6
+  - first:
+      213: -6037908874908478303
+    second: WalkingBomb_7
+  - first:
+      213: -8857601972874141470
+    second: WalkingBomb_8
+  - first:
+      213: -6729763698141428898
+    second: WalkingBomb_9
+  - first:
+      213: -6258854637072517646
+    second: WalkingBomb_10
+  - first:
+      213: -7259420835272981526
+    second: WalkingBomb_11
+  - first:
+      213: 2381432280264336625
+    second: WalkingBomb_12
+  - first:
+      213: 1873481814653195202
+    second: WalkingBomb_13
+  - first:
+      213: 5562404583827924596
+    second: WalkingBomb_14
+  - first:
+      213: -5743091946928275573
+    second: WalkingBomb_15
+  - first:
+      213: -729616640499916003
+    second: WalkingBomb_16
+  - first:
+      213: 682970091415525461
+    second: WalkingBomb_17
+  - first:
+      213: -3022559840407459576
+    second: WalkingBomb_18
+  - first:
+      213: 2436562272906517148
+    second: WalkingBomb_19
+  - first:
+      213: 5193641149788673429
+    second: WalkingBomb_20
+  - first:
+      213: 7857092024832892744
+    second: WalkingBomb_21
+  - first:
+      213: -6610532643932364580
+    second: WalkingBomb_22
+  - first:
+      213: -7289842744358832797
+    second: WalkingBomb_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WalkingBomb_0
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 865
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 712add103172d7d20800000000000000
+      internalID: 3277819066384753175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_1
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 865
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e3c7cd277daed70800000000000000
+      internalID: 9073301287616659095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_2
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 865
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9828d15bddb27f2c0800000000000000
+      internalID: -4397998279877623159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_3
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 865
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f099c4dad84dd2100800000000000000
+      internalID: 84957672952862991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_4
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 865
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d026661d70fa59d10800000000000000
+      internalID: 2131802446742577677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_5
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 863
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9dd8fd73a0ccb720800000000000000
+      internalID: 2863375271526456732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_6
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 687
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee68bf6e4fbe66f0800000000000000
+      internalID: -689403349338394898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_7
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 687
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a4d6e45ed9053ca0800000000000000
+      internalID: -6037908874908478303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_8
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 687
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e0a90d6fe9731580800000000000000
+      internalID: -8857601972874141470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_9
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 687
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5306f582931b92a0800000000000000
+      internalID: -6729763698141428898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_10
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 687
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f57c705ed41429a0800000000000000
+      internalID: -6258854637072517646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_11
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 687
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae30c7e563b514b90800000000000000
+      internalID: -7259420835272981526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_12
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 515
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4edc1aa0c8c0120800000000000000
+      internalID: 2381432280264336625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_13
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 515
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c3de87c8c1fff910800000000000000
+      internalID: 1873481814653195202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_14
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 515
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47661148f71a13d40800000000000000
+      internalID: 5562404583827924596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_15
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 515
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8ffeee6d407c40b0800000000000000
+      internalID: -5743091946928275573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_16
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 515
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d13e9c8f781efd5f0800000000000000
+      internalID: -729616640499916003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_17
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 515
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 558d90bfda56a7900800000000000000
+      internalID: 682970091415525461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_18
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 337
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 809e620e6d5bd06d0800000000000000
+      internalID: -3022559840407459576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_19
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 337
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9a16bd4a7860d120800000000000000
+      internalID: 2436562272906517148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_20
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 337
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5955100db15831840800000000000000
+      internalID: 5193641149788673429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_21
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 337
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f18b3619ff90d60800000000000000
+      internalID: 7857092024832892744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_22
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 337
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd0a94e959ba244a0800000000000000
+      internalID: -6610532643932364580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalkingBomb_23
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 337
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3657802b5a645da90800000000000000
+      internalID: -7289842744358832797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

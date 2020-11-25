@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Vector", menuName = "Value/Vector")]
 
 public class VectorValue : ScriptableObject, ISerializationCallbackReceiver
 {

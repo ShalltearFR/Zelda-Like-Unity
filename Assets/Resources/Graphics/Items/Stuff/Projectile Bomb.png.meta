@@ -256,7 +256,7 @@ TextureImporter:
         width: 88
         height: 88
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -432,6 +432,27 @@ TextureImporter:
       bones: []
       spriteID: ad059c9e29fcba2e0800000000000000
       internalID: -2113367370225856294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Projectile Bomb_15
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 26
+        width: 88
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a71691a66a977af0800000000000000
+      internalID: -398680276410689626
       vertices: []
       indices: 
       edges: []
