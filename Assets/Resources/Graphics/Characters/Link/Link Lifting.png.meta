@@ -26,8 +26,11 @@ TextureImporter:
   - first:
       213: 6795453007138652089
     second: Link Lifting_7
+  - first:
+      213: 7777817243706998624
+    second: Link Lifting_8
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -47,6 +50,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -81,6 +85,8 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -137,10 +143,10 @@ TextureImporter:
       name: Link Lifting_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 209
-        width: 60
-        height: 60
+        x: 7
+        y: 471
+        width: 120
+        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,10 +164,10 @@ TextureImporter:
       name: Link Lifting_1
       rect:
         serializedVersion: 2
-        x: 72
-        y: 209
-        width: 60
-        height: 60
+        x: 185
+        y: 464
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,10 +185,10 @@ TextureImporter:
       name: Link Lifting_2
       rect:
         serializedVersion: 2
-        x: 12
-        y: 149
-        width: 60
-        height: 60
+        x: 5
+        y: 345
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,10 +206,10 @@ TextureImporter:
       name: Link Lifting_3
       rect:
         serializedVersion: 2
-        x: 72
-        y: 149
-        width: 60
-        height: 60
+        x: 188
+        y: 344
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,10 +227,10 @@ TextureImporter:
       name: Link Lifting_4
       rect:
         serializedVersion: 2
-        x: 12
-        y: 89
-        width: 60
-        height: 60
+        x: 7
+        y: 223
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,10 +248,10 @@ TextureImporter:
       name: Link Lifting_5
       rect:
         serializedVersion: 2
-        x: 72
-        y: 89
-        width: 60
-        height: 60
+        x: 182
+        y: 217
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,10 +269,10 @@ TextureImporter:
       name: Link Lifting_6
       rect:
         serializedVersion: 2
-        x: 12
-        y: 29
-        width: 60
-        height: 60
+        x: 9
+        y: 75
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,11 +290,11 @@ TextureImporter:
       name: Link Lifting_7
       rect:
         serializedVersion: 2
-        x: 72
-        y: 29
-        width: 60
-        height: 60
-      alignment: 0
+        x: 188
+        y: 88
+        width: 120
+        height: 102
+      alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []

@@ -21,6 +21,7 @@ public class Bomb : MonoBehaviour
     {
         soundManagement.soundEffectSource[4].clip = Resources.Load<AudioClip>("Audio/SE/Bomb Explosion");
         soundManagement.soundEffectSource[4].Play();
+        gameObject.layer = 0;
     }
 
     public void Setup(Vector2 velocity, Vector3 direction)

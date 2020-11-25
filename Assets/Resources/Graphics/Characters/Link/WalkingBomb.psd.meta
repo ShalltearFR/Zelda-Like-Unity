@@ -167,10 +167,10 @@ TextureImporter:
       name: WalkingBomb_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 865
-        width: 60
-        height: 60
+        x: 52
+        y: 841
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,10 +188,10 @@ TextureImporter:
       name: WalkingBomb_1
       rect:
         serializedVersion: 2
-        x: 248
-        y: 865
-        width: 60
-        height: 60
+        x: 217
+        y: 851
+        width: 120
+        height: 102
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,10 +209,10 @@ TextureImporter:
       name: WalkingBomb_2
       rect:
         serializedVersion: 2
-        x: 415
-        y: 865
-        width: 60
-        height: 60
+        x: 384
+        y: 840
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,10 +230,10 @@ TextureImporter:
       name: WalkingBomb_3
       rect:
         serializedVersion: 2
-        x: 550
-        y: 865
-        width: 60
-        height: 60
+        x: 519
+        y: 842
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,10 +251,10 @@ TextureImporter:
       name: WalkingBomb_4
       rect:
         serializedVersion: 2
-        x: 684
-        y: 865
-        width: 60
-        height: 60
+        x: 653
+        y: 842
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,10 +272,10 @@ TextureImporter:
       name: WalkingBomb_5
       rect:
         serializedVersion: 2
-        x: 825
-        y: 863
-        width: 60
-        height: 60
+        x: 793
+        y: 840
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -293,10 +293,10 @@ TextureImporter:
       name: WalkingBomb_6
       rect:
         serializedVersion: 2
-        x: 80
-        y: 687
-        width: 60
-        height: 60
+        x: 50
+        y: 662
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -314,10 +314,10 @@ TextureImporter:
       name: WalkingBomb_7
       rect:
         serializedVersion: 2
-        x: 248
-        y: 687
-        width: 60
-        height: 60
+        x: 218
+        y: 660
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -335,10 +335,10 @@ TextureImporter:
       name: WalkingBomb_8
       rect:
         serializedVersion: 2
-        x: 414
-        y: 687
-        width: 60
-        height: 60
+        x: 384
+        y: 660
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -356,10 +356,10 @@ TextureImporter:
       name: WalkingBomb_9
       rect:
         serializedVersion: 2
-        x: 550
-        y: 687
-        width: 60
-        height: 60
+        x: 520
+        y: 662
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,10 +377,10 @@ TextureImporter:
       name: WalkingBomb_10
       rect:
         serializedVersion: 2
-        x: 683
-        y: 687
-        width: 60
-        height: 60
+        x: 653
+        y: 660
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -398,10 +398,10 @@ TextureImporter:
       name: WalkingBomb_11
       rect:
         serializedVersion: 2
-        x: 821
-        y: 687
-        width: 60
-        height: 60
+        x: 791
+        y: 660
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -419,10 +419,10 @@ TextureImporter:
       name: WalkingBomb_12
       rect:
         serializedVersion: 2
-        x: 84
-        y: 515
-        width: 60
-        height: 60
+        x: 55
+        y: 490
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -440,10 +440,10 @@ TextureImporter:
       name: WalkingBomb_13
       rect:
         serializedVersion: 2
-        x: 247
-        y: 515
-        width: 60
-        height: 60
+        x: 218
+        y: 490
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -461,10 +461,10 @@ TextureImporter:
       name: WalkingBomb_14
       rect:
         serializedVersion: 2
-        x: 414
-        y: 515
-        width: 60
-        height: 60
+        x: 385
+        y: 488
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -482,10 +482,10 @@ TextureImporter:
       name: WalkingBomb_15
       rect:
         serializedVersion: 2
-        x: 552
-        y: 515
-        width: 60
-        height: 60
+        x: 523
+        y: 490
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -503,10 +503,10 @@ TextureImporter:
       name: WalkingBomb_16
       rect:
         serializedVersion: 2
-        x: 680
-        y: 515
-        width: 60
-        height: 60
+        x: 651
+        y: 490
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -524,10 +524,10 @@ TextureImporter:
       name: WalkingBomb_17
       rect:
         serializedVersion: 2
-        x: 825
-        y: 515
-        width: 60
-        height: 60
+        x: 796
+        y: 488
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -545,10 +545,10 @@ TextureImporter:
       name: WalkingBomb_18
       rect:
         serializedVersion: 2
-        x: 83
-        y: 337
-        width: 60
-        height: 60
+        x: 53
+        y: 311
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -566,10 +566,10 @@ TextureImporter:
       name: WalkingBomb_19
       rect:
         serializedVersion: 2
-        x: 250
-        y: 337
-        width: 60
-        height: 60
+        x: 220
+        y: 310
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -587,10 +587,10 @@ TextureImporter:
       name: WalkingBomb_20
       rect:
         serializedVersion: 2
-        x: 415
-        y: 337
-        width: 60
-        height: 60
+        x: 385
+        y: 311
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -608,10 +608,10 @@ TextureImporter:
       name: WalkingBomb_21
       rect:
         serializedVersion: 2
-        x: 553
-        y: 337
-        width: 60
-        height: 60
+        x: 523
+        y: 310
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -629,10 +629,10 @@ TextureImporter:
       name: WalkingBomb_22
       rect:
         serializedVersion: 2
-        x: 679
-        y: 337
-        width: 60
-        height: 60
+        x: 649
+        y: 312
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -650,10 +650,10 @@ TextureImporter:
       name: WalkingBomb_23
       rect:
         serializedVersion: 2
-        x: 823
-        y: 337
-        width: 60
-        height: 60
+        x: 793
+        y: 310
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

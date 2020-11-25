@@ -70,12 +70,13 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = startingPosition.initialValue;
         }
-        else {
+        else
+        {
             // Teleporte le joueur à la valeur demandé
             transform.position = startingPosition.teleporationValue;
             startingPosition.teleporationValue = new Vector2(0, 0);
         }
-        
+
         // Si le gameobject de teleportation exist, lance la procedure
         if (GameObject.Find("Set Teleport") != null)
         { GameObject.Find("Set Teleport").GetComponent<SetTeleport>().Teleport(); }
@@ -118,7 +119,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Si le joueur attaque à l'épée
                 StartCoroutine(AttackCo());
-            } else if (Input.GetButtonDown("RB") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
+            }
+            else if (Input.GetButtonDown("RB") && currentState != PlayerState.attack && currentState != PlayerState.stagger)
             {
                 // Si le joueur appuie sur RT (actuellement Y)
                 StartCoroutine(RBCo());
@@ -127,7 +129,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 // Si le joueur appuie sur LT
                 StartCoroutine(LTCo());
-            }else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
+            }
+            else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
             {
                 // Si le joueur bouge, change son etat en "walk"
                 // S'il ne bouge pas, change en "idle"
@@ -173,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
                     yield return null;
                     animator.SetBool("LaunchBomb", false);
                     animator.SetBool("TakingBomb", false);
-                    yield return new WaitForSeconds(0.35f);
+                    yield return new WaitForSeconds(0.30f);
                     currentState = PlayerState.idle;
                     if (transform.GetChild(5).transform.GetChild(0).transform != null)
                     {
@@ -383,26 +386,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void RaiseItem(TreasureChest.TypeOfItem typeOfItem)
     {
-//        foreach (AnimatorControllerParameter parameter in GetComponent<Animator>().parameters)
- //       {
-//            GetComponent<Animator>().SetBool(parameter.name, false);
-//        }
+        //        foreach (AnimatorControllerParameter parameter in GetComponent<Animator>().parameters)
+        //       {
+        //            GetComponent<Animator>().SetBool(parameter.name, false);
+        //        }
 
         // Change l'etat du joueur s'il ouvre un coffre
         //        if (playerInventory.currentItem != null)
         //        {
         if (currentState != PlayerState.interact)
         {
-                animator.SetBool(typeOfItem.ToString(), true);
-                currentState = PlayerState.interact;
+            animator.SetBool(typeOfItem.ToString(), true);
+            currentState = PlayerState.interact;
         }
         else
         {
-                animator.SetBool(typeOfItem.ToString(), false);
-                currentState = PlayerState.idle;
-                playerInventory.currentItem = null;
+            animator.SetBool(typeOfItem.ToString(), false);
+            currentState = PlayerState.idle;
+            playerInventory.currentItem = null;
         }
-//        }
+        //        }
     }
 
     void UpdateAnimationAndMove()
@@ -410,7 +413,8 @@ public class PlayerMovement : MonoBehaviour
         // Met a jour l'animation du personnage quand il se deplace
         if (change != Vector3.zero)
         {
-            if (currentState == PlayerState.walk || currentState == PlayerState.idle) {
+            if (currentState == PlayerState.walk || currentState == PlayerState.idle)
+            {
                 MoveCharacter();
                 animator.SetFloat("moveX", change.x);
                 animator.SetFloat("moveY", change.y);
@@ -423,7 +427,8 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetFloat("moveY", change.y);
                 animator.SetBool("WalkingObject", true);
             }
-        } else
+        }
+        else
         {
             if (currentState == PlayerState.walk || currentState == PlayerState.idle) { animator.SetBool("moving", false); }
             if (currentState == PlayerState.takeObject) { animator.SetBool("WalkingObject", false); }
@@ -449,7 +454,8 @@ public class PlayerMovement : MonoBehaviour
             // Effectue la procedure de degats du joueur
             StartCoroutine(DamageAnimation());
             StartCoroutine(KnockCo(knockTime, mobGameObject, isInTakeObjectState));
-        } else
+        }
+        else
         {
             // Si le personnage n'a plus de vie
             // Effectue la procedure de mort
